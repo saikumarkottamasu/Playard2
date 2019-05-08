@@ -12,21 +12,21 @@ export default class signUp extends Component<Props> {
   static navigationOptions = {
        header: null,
     };
-  constructor(props) 
+  constructor(props)
   {
     super(props);
     this.SignUp = this.SignUp.bind(this);
-    this.state = 
+    this.state =
             {
               showPassword: true,
-              name: '', 
-              mobileNumber: '', 
+              name: '',
+              mobileNumber: '',
               email: '',
               password:'',
               deviceType:'android',
               deviceToken:'Testing',
               regType:'direct',
-              icEye: 'visibility-off', 
+              icEye: 'visibility-off',
               selected: "key1"
             };
 
@@ -35,15 +35,15 @@ export default class signUp extends Component<Props> {
         let newState;
         if (this.state.showPassword)
          {
-            newState = 
+            newState =
             {
                 icEye: 'visibility',
                 showPassword: false,
                 password: this.state.password
             }
-        } else 
+        } else
         {
-            newState = 
+            newState =
             {
                 icEye: 'visibility-off',
                 showPassword: true,
@@ -52,7 +52,7 @@ export default class signUp extends Component<Props> {
         }
         this.setState(newState)
     };
-  handlePassword = (password) => 
+  handlePassword = (password) =>
     {
         let newState = {
             icEye: this.state.icEye,
@@ -81,12 +81,12 @@ export default class signUp extends Component<Props> {
   }
 
 
-  SignUp = async () => 
+  SignUp = async () =>
     {
-                  
+
         await AsyncStorage.setItem('@storage_Key',this.state.mobileNumber)
         console.log(this.state.mobileNumber);
-                            
+
         const {name,email,mobileNumber,password} = this.state;
         let reg = /^[a-zA-Z0-9 ](_(?!(\.|_))|\.(?!(_|\.))|[a-zA-Z0-9 ]){3,76}[a-zA-Z0-9 ]*$/;
         let reg1 = /^(\+\d{1,3}[- ]?)?\d{10}$/;
@@ -95,27 +95,27 @@ export default class signUp extends Component<Props> {
 
         if(name=="")
         {
-          this.setState({field:'Please enter Name'})          
-        }   
+          this.setState({field:'Please enter Name'})
+        }
         else if(reg.test(name) === false)
         {
             this.setState({field:':#?@&%/ are not allowed and should enter 3-76 characters in the name'})
             return false;
         }
-      
+
         else if(mobileNumber=="")
         {
-          this.setState({field:'Please enter Mobile Number'})          
+          this.setState({field:'Please enter Mobile Number'})
         }
         else if(reg1.test(mobileNumber) === false)
         {
             this.setState({field:'Mobile Number should contain 10 digits'})
             return false;
-        }  
+        }
         else if(email=="")
         {
-          this.setState({field:'Please enter Email Id'})          
-        }       
+          this.setState({field:'Please enter Email Id'})
+        }
         else if(reg2.test(email) === false)
         {
             this.setState({field:'Please enter valid Email Id'})
@@ -123,8 +123,8 @@ export default class signUp extends Component<Props> {
         }
         else if(password=="")
         {
-          this.setState({field:'Please enter Password'})          
-        }       
+          this.setState({field:'Please enter Password'})
+        }
         else if(reg3.test(password) === false)
         {
             this.setState({field:'Password should contain at least one numeric digit,one alphabet and length of 6-20'})
@@ -132,9 +132,9 @@ export default class signUp extends Component<Props> {
         }
 
         else
-        { 
-          this.setState({field:''}) 
-        }     
+        {
+          this.setState({field:''})
+        }
               let formData = new FormData();
               formData.append('name', this.state.name);
               formData.append('mobileNumber', this.state.mobileNumber);
@@ -153,20 +153,20 @@ export default class signUp extends Component<Props> {
               }
               fetch("http://testingmadesimple.org/playard/api/service/signup", data)
               .then(response => response.json())
-              .then(responseJson => 
+              .then(responseJson =>
                { if(responseJson.status == ("1"))
-                         {                       
+                         {
                             console.log('number is',mobileNumber)
                             this.props.navigation.navigate("Otp");
                             this.setState({
-                                  name: '', 
-                                  mobileNumber: '', 
+                                  name: '',
+                                  mobileNumber: '',
                                   email: '',
                                   password:'',
-                                 
-                                })   
+
+                                })
                           }
-                          
+
                           else if(responseJson.status == ("2"))
                           {
                               alert("Failed");
@@ -190,13 +190,13 @@ export default class signUp extends Component<Props> {
 
               .catch(error => console.error(error));
               console.log(data)
-    
+
 
     }
- 
+
   render() {
     return (
-     
+
         <View style={{flex:1}}>
                <ScrollView>
                   <View style={styles.container}>
@@ -208,7 +208,7 @@ export default class signUp extends Component<Props> {
                       <View>
                           <TextInput
                             placeholder="Name"
-                            style={styles.inputField}                                                     
+                            style={styles.inputField}
                             onChangeText={(text) => this.setState({name:text})}
                             value={this.state.name}
                             returnKeyType = { "next" }
@@ -216,18 +216,18 @@ export default class signUp extends Component<Props> {
                             blurOnSubmit={false}
                           />
                           <View style={styles.mobileWrapper}>
-                              <View style={styles.mobileText1}>                        
+                              <View style={styles.mobileText1}>
                                   <Picker
                                     note
                                     mode="dropdown"
-                                    
+
                                     selectedValue={this.state.selected}
                                     onValueChange={this.onValueChange.bind(this)}
                                   >
                                     <Picker.Item label="IND +91" value="key0" />
                                     <Picker.Item label="IND +91" value="key1" />
                                     <Picker.Item label="UK +44" value="key2" />
-                                    
+
                                   </Picker>
                               </View>
                                 <Text style={{width:"3%"}}></Text>
@@ -244,7 +244,7 @@ export default class signUp extends Component<Props> {
                                   blurOnSubmit={false}
                                 />
 
-                               
+
                           </View>
                           <TextInput
                                 placeholder="Email ID"
@@ -255,7 +255,7 @@ export default class signUp extends Component<Props> {
                                 returnKeyType = { "next" }
                                 onSubmitEditing={() => { this.password.focus(); }}
                                 blurOnSubmit={false}
-                          />                      
+                          />
                           <View style={{flexDirection:"row"}}>
                                  <TextInput
                                     placeholder="Password"
@@ -264,13 +264,13 @@ export default class signUp extends Component<Props> {
                                     value={this.state.password}
                                     onChangeText={this.handlePassword}
                                     ref={(input) => { this.password = input; }}
-                                  /> 
+                                  />
                                   <View style={styles.eyeView}>
                                     <TouchableOpacity onPress={this.changePwdType.bind(this)}>{this.pwdHideAndShow()}
                                     </TouchableOpacity>
-                                        
-                                  </View> 
-                          </View>  
+
+                                  </View>
+                          </View>
                         <Text style={styles.errorText}>{this.state.field}</Text>
                         <View style={styles.signInBtn}>
                                   <TouchableOpacity onPress={this.SignUp} >
@@ -281,22 +281,22 @@ export default class signUp extends Component<Props> {
                               <Hr lineColor="#ddd" width={1} text="OR" textStyles={{fontFamily:"TwCenMTStd",fontSize:16,color:"#363f4d",marginLeft:5,marginRight:5}}  />
                         </View>
 
-                       
+
                         <View style={{flexDirection:"row",justifyContent:"center"}}>
                             <View style={{margin:10}}>
-                                <Icon name="logo-facebook" 
+                                <Icon name="logo-facebook"
                                   Icon size={60} type='font-awesome' color='#3C5A99'
                                 />
                             </View>
                             <View style={{margin:10}}>
-                                <Icon name="logo-google" 
+                                <Icon name="logo-google"
                                   Icon size={60} type='font-awesome' color='#DD4B39'
                                 />
                             </View>
-                        </View>                 
+                        </View>
                     </View>
                 </View>
-                          </ScrollView>
+
 
                 <View style={styles.signInBtn2}>
                     <View style={styles.loginWrapper}>
@@ -304,20 +304,21 @@ export default class signUp extends Component<Props> {
                         <TouchableOpacity onPress={() => this.props.navigation.navigate('signIn')}>
                             <Text style={styles.signInBtnText2}>  Login</Text>
                         </TouchableOpacity>
-                    </View>                    
+                    </View>
                 </View>
+                  </ScrollView>
 
       </View>
-    
+
 
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: 
+  container:
   {
-    padding:30 
+    padding:30
   },
 inputField:
   {
@@ -351,7 +352,7 @@ errorText:
     borderColor: '#dadada',
     fontSize:18,
     borderBottomWidth: 1,
-    fontFamily:"TwCenMTStd",    
+    fontFamily:"TwCenMTStd",
     width:"40%",
   },
 
@@ -360,10 +361,10 @@ errorText:
     borderColor: '#dadada',
     fontSize:18,
     borderBottomWidth: 1,
-    fontFamily:"TwCenMTStd",    
+    fontFamily:"TwCenMTStd",
     width:"57%",
 
-  }, 
+  },
   passwordField:
   {
     borderColor: '#dadada',
@@ -380,11 +381,11 @@ errorText:
     marginTop:18,
   },
   signInBtn:
-  {   
+  {
     backgroundColor:"#33cbf6",
     borderRadius:5,
     marginTop:20,
-    marginBottom:20  
+    marginBottom:20
   },
   signInBtnText:
   {
@@ -399,21 +400,20 @@ errorText:
     flexDirection:"row",
     justifyContent:"center",
     padding:15,
-  
+
   alignItems:'center',
-    
+
   },
   signInBtn2:
-  {  
-    backgroundColor:"#7e5bef", 
+  {
+    backgroundColor:"#7e5bef",
   },
   signInBtnText2:
   {
     fontSize:16 ,
     color:'#fff',
     textAlign:"center",
-    fontFamily:"TwCenMTStd",   
+    fontFamily:"TwCenMTStd",
     bottom : 0,
   },
 });
-
