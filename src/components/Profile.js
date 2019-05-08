@@ -75,6 +75,8 @@ export default class Profile extends Component {
                             </TouchableOpacity>
                   </View>
               </View>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('activity_view')}>  
+
               <View style={styles.listBody}>
                     <View style={{flexDirection:"row",marginBottom:10}}>
                         <View style={styles.dateContent}>
@@ -120,6 +122,7 @@ export default class Profile extends Component {
                               </View>
                     </View>
             </View>
+            </TouchableOpacity>
               <View style={styles.listBody}>
                     <View style={{flexDirection:"row",marginBottom:10}}>
                         <View style={styles.dateContent}>

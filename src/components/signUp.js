@@ -296,7 +296,7 @@ export default class signUp extends Component<Props> {
                         </View>
                     </View>
                 </View>
-
+          </ScrollView>
 
                 <View style={styles.signInBtn2}>
                     <View style={styles.loginWrapper}>
@@ -306,7 +306,7 @@ export default class signUp extends Component<Props> {
                         </TouchableOpacity>
                     </View>
                 </View>
-                  </ScrollView>
+                  
 
       </View>
 

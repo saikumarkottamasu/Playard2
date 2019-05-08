@@ -201,7 +201,8 @@ async getKey() {
                                     this.otp1.focus();
                                   }
                                   }
-                              }                                   maxLength={1}
+                              }                                  
+                              maxLength={1}
                               value={this.state.otp2}
                               returnKeyType = { "next" }
                               blurOnSubmit={false}

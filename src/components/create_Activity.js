@@ -42,12 +42,11 @@ onValueChange(value: string) {
     < SafeAreaView >
                   <View style={styles.cartHeader}>
                       <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>                  
-
                            <Image
                           style={styles.searchImg}
                           source={require('.././images/back-arrow-white.png')} />
                       </TouchableOpacity>
-                      <Text style={styles.profileText}>Create </Text>                                     
+                      <Text style={styles.profileText}>Create Activity</Text>                                     
                   </View>
                   <View style={styles.contentBody}>
                       <View style={styles.itemWrapper}>
@@ -162,7 +161,7 @@ const styles = StyleSheet.create({
     fontSize:20,
     fontFamily:"TwCenMTStd",
     color:"white",
-    marginLeft:10,
+    marginLeft:20,
     textAlignVertical:"center",
   },
   iconContainer:

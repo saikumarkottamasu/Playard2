@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text,TextInput,ProgressBarAndroid,TouchableOpacity,ScrollView,TouchableHighlight,Image,View } from 'react-native';
+import { StyleSheet, Text,TextInput,SafeAreaView ,TouchableOpacity,ScrollView,TouchableHighlight,Image,View } from 'react-native';
 import Icon from 'react-native-ionicons';
 import {Item, Input } from 'native-base';
 
@@ -11,7 +11,7 @@ static navigationOptions = {
  render() 
  {
    return(
-    <View>
+    <SafeAreaView >
               <View style={styles.cartHeader}>
                       <TouchableOpacity onPress={() => this.props.navigation.navigate('create_Activity')}>                  
                            <Image
@@ -41,7 +41,7 @@ static navigationOptions = {
 
               </View>
                    
-    </View>
+    </SafeAreaView >
      
    );
  }

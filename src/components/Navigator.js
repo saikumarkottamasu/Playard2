@@ -14,6 +14,10 @@ import select_Location from './select_Location';
 import select_Date from './select_Date';
 import select_Time from './select_Time';
 
+import activity_view from './activity_view';
+import send_query from './send_query';
+import join_activity from './join_activity';
+
 import Splashscreen from './Splashscreen';
 
  const Navigator = createStackNavigator
@@ -32,11 +36,14 @@ import Splashscreen from './Splashscreen';
 		select_Location: {screen: select_Location},
 		select_Date: {screen: select_Date},
 		select_Time: {screen: select_Time},
+		activity_view: {screen: activity_view},
+		send_query: {screen: send_query},
+		join_activity: {screen: join_activity},
 
 		Splashscreen: { screen: Splashscreen },	
 	},
 	{
-    initialRouteName: 'signUp',
+    initialRouteName: 'signIn',
   	}
 
 );

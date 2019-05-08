@@ -3,7 +3,7 @@ import {
   AppRegistry,
   StyleSheet,SafeAreaView,
   Text,
-  TextInput,CheckBox,
+  TextInput,CheckBox,ScrollView,
   View,TouchableOpacity,Image,
   AsyncStorage
 } from 'react-native';
@@ -25,21 +25,29 @@ static navigationOptions = {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-       
+            <ScrollView>
                   <Text style={styles.headerText}>Preferred Sports</Text>
                   <Text style={styles.subHeaderText}>dummy text of printing and typesetting industry.Lorem 
                         has been the indutry's standard dummy text</Text>
                  
-                  <Item regular style={styles.searchBar}>
-                        <Input placeholder="Search by Sports" style={styles.searchText}/>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('')}>
-                          <Image
-                          style={styles.searchImg}
-                          source={require('.././images/search-icon.png')} />
-                                        
-                        </TouchableOpacity >
+                  
 
-                  </Item>
+                  <View style={{flexDirection:"row"}}>
+                      <TextInput
+                            placeholder="Search by Sports"
+                            style={styles.inputField}
+                            
+                          />  
+                      <View style={styles.eyeView}>
+                          <TouchableOpacity onPress={() => this.props.navigation.navigate('')}>
+                              <Image
+                              style={styles.searchImg}
+                              source={require('.././images/search-icon.png')} />
+                                        
+                        </TouchableOpacity > 
+                      </View>
+                  </View>             
+
                   <View style={styles.accordionContainer}>
                       <Collapse>                    
                             <CollapseHeader style={styles.accHeader}>
@@ -299,7 +307,7 @@ static navigationOptions = {
          
         
        
-
+            </ScrollView>
       </SafeAreaView>
     );
   }
@@ -322,19 +330,6 @@ subHeaderText:
     fontFamily:"TwCenMTStd",
     color:"#999999",
     fontSize:16,
-  },
-searchBar:
-  {
-    borderWidth:1,
-    borderColor:"#d7d7d7",
-    marginTop:20,
-    borderRadius:5
-  },
-searchText:
-  {
-    fontSize:18,
-    color:"#999999",
-    fontFamily:"TwCenMTStd"
   },
 accordionContainer:
   {
@@ -363,7 +358,7 @@ itemWrapper:
   {
     flexDirection:"row",
     marginTop:10,
-     marginLeft:15
+    marginLeft:10
   },
   accBody:
   {
@@ -372,7 +367,6 @@ itemWrapper:
 itemWrapper2:
   {
     flexDirection:"row",
-    marginLeft:30,
     marginTop:10
   },
 bodyText:
@@ -395,7 +389,7 @@ selectText:
 inlineWrapper:
   {
     flexDirection:"column",
-   
+    width:"50%"
   },
 
 signInBtn:
@@ -429,6 +423,24 @@ sportIconImg:
 {
   width:15,
   height:15,
-}
+},
+inputField:
+  {
+    borderColor: '#dadada',
+    fontSize:18,
+    borderWidth: 1,
+    borderRadius:5,
+    fontFamily:"TwCenMTStd",
+    marginTop:10,
+    width:"100%",
+    color:"#999999",
+    paddingLeft:10,
+    height:45
+  },
+  eyeView:
+  {
+    marginLeft:'auto',
+    marginTop:22,
+  },
 });
 
