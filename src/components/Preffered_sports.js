@@ -26,7 +26,7 @@ static navigationOptions = {
     return (
       <SafeAreaView style={styles.container}>
        
-                  <Text style={styles.headerText}>Preferred </Text>
+                  <Text style={styles.headerText}>Preferred Sports</Text>
                   <Text style={styles.subHeaderText}>dummy text of printing and typesetting industry.Lorem 
                         has been the indutry's standard dummy text</Text>
                  
