@@ -17,6 +17,7 @@ import select_Time from './select_Time';
 import activity_view from './activity_view';
 import send_query from './send_query';
 import join_activity from './join_activity';
+import see_all from './see_all';
 
 import Splashscreen from './Splashscreen';
 
@@ -39,11 +40,12 @@ import Splashscreen from './Splashscreen';
 		activity_view: {screen: activity_view},
 		send_query: {screen: send_query},
 		join_activity: {screen: join_activity},
+		see_all: {screen: see_all},
 
 		Splashscreen: { screen: Splashscreen },	
 	},
 	{
-    initialRouteName: 'signIn',
+    initialRouteName: 'activity_view',
   	}
 
 );

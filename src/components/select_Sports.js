@@ -173,9 +173,9 @@ accordionContainer:
     borderRadius:5
   },
 accHeader:
- {
-  flexDirection:"row",  
- },
+  {
+    flexDirection:"row",  
+  },
 iconContainer:
   {
     marginLeft:'auto',
@@ -191,34 +191,36 @@ itemWrapper:
   {
     flexDirection:"row",
     marginTop:10,
-     marginLeft:15
+    marginLeft:10,
+    marginBottom:5
   },
-  accBody:
-  {
-  flexDirection:"row",
-  },
-  itemWrapper2:
+accBody:
   {
     flexDirection:"row",
-    marginLeft:30,
-    marginTop:10
+    marginTop:20
   },
-  dropdownImg:
-{
-  width:15,
-  height:15,
-  marginRight:5
-},
+itemWrapper2:
+  {
+    flexDirection:"row",
+    marginTop:10,
+    marginBottom:5
+  },
+dropdownImg:
+  {
+    width:15,
+    height:15,
+    marginRight:5
+  },
 inlineWrapper:
   {
     flexDirection:"column",
-   
+    width:"50%"
   },
 sportIconImg:
-{
-  width:15,
-  height:15,
-},
+  {
+    width:15,
+    height:15,
+  },
 bodyText:
   {
     fontSize:14,

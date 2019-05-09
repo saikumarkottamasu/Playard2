@@ -5,7 +5,14 @@ import { StyleSheet,Text,TextInput,TouchableOpacity,SafeAreaView,ScrollView,Touc
 export default class send_query extends React.Component {
 static navigationOptions = {
        header: null,
-    };     
+    }; 
+
+  constructor(props) {
+   super(props);
+   this.state = {
+    value:''
+    };
+  }    
  render() 
  {
    return(
@@ -26,17 +33,24 @@ static navigationOptions = {
                                 style={styles.textArea}
                                 underlineColorAndroid="transparent"
                                 placeholder="What is the cost per match?"
-                                placeholderTextColor="grey"
+                                placeholderTextColor="#7f7f7f"
                                 numberOfLines={8}
                                 multiline={true}
+                                maxLength = {1024}
+                                value={this.state.value}
+                                onChangeText={(value) => this.setState({value})}
                               />
+                          <Text style={styles.additionalText}>
+                            {this.state.value.length} of 1024 Characters
+                         </Text>
                       </View>
+               </ScrollView>
                       <View style={styles.joinActivityBtn}>
                               <TouchableOpacity onPress={() => this.props.navigation.navigate('')}>
                                     <Text style={styles.joinActivityBtnText}>Send</Text>
                               </TouchableOpacity>
                       </View>
-              </ScrollView>
+             
     </SafeAreaView>
      
    );
@@ -93,10 +107,14 @@ cartHeader:
   textArea:
   {
     borderColor: '#dadada',
-    fontSize:18,
-    borderWidth: 1,
+    fontSize:16,
+    elevation:1,
+    borderRadius:5,
+    color:"#7f7f7f",
+    textAlignVertical: 'top',
+    borderWidth: 0.65,
     fontFamily:"TwCenMTStd",
-    marginBottom:40,
+    marginBottom:5,
     paddingLeft:10
   },
 });

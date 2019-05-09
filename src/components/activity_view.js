@@ -22,7 +22,7 @@ static navigationOptions = {
                           <TouchableOpacity onPress={() => this.props.navigation.navigate('')}>                  
                               <Image
                                   style={styles.searchImg}
-                                  source={require('.././images/chat-icon.png')} />
+                                  source={require('.././images/share-white-icon.png')} />
                           </TouchableOpacity>
                       </View>                                     
               </View>
@@ -32,7 +32,7 @@ static navigationOptions = {
                         <View style={{flexDirection:"row"}}>
                                 <Image
                                     style={styles.smallLocationImg}
-                                    source={require('.././images/timer-icon.png')} />
+                                    source={require('.././images/date-icon-gray.png')} />
                                     <Text style={styles.areaText}>19 Apr,Friday</Text>
                         </View>
                          <View style={{flexDirection:"row",marginLeft:30}}>
@@ -51,7 +51,7 @@ static navigationOptions = {
                     <Text style={styles.upcomingText}>Activity Instructions</Text>
                     <View style={styles.clockWrapper}>                         
                          <View style={styles.clockContent}> 
-                                <Text style={styles.startText}>1-2</Text>
+                                <Text style={styles.startText}>1-  2</Text>
                                 <Text style={styles.clockTimeText}>Beginner - Amateur</Text>
                           </View>
                          <View style={styles.clockContent}>
@@ -101,6 +101,7 @@ static navigationOptions = {
                                 <View style={{flexDirection:"column",marginLeft:5}}> 
                                       <Text style={styles.typeText}>Neeraja</Text>
                                       <Text style={styles.nameText}>Intermediate</Text>
+                                      <Text style={styles.hostText}>Host</Text>
                                 </View>
                           </View>
                          <View style={styles.playerContent}> 
@@ -110,6 +111,7 @@ static navigationOptions = {
                                 <View style={{flexDirection:"column",marginLeft:5}}> 
                                       <Text style={styles.typeText}>Parvathi</Text>
                                       <Text style={styles.nameText}>Intermediate</Text>
+                                      <Text style={styles.hostText}>Host</Text>
                                 </View>
                           </View>
                     </View>
@@ -220,7 +222,7 @@ const styles = StyleSheet.create({
   clockTimeText:
   {
     fontSize:16,
-    color:"#363f4d",
+    color:"#7f7f7f",
     fontFamily:"TwCenMTStd",
     textAlign:"center",
     marginTop:5
@@ -272,11 +274,16 @@ const styles = StyleSheet.create({
     paddingTop:10,
     width:"50%",
     flexDirection:"row",
+    alignItems: 'center' ,
+
+
   },
   nameText:
   {
     fontSize:14,
     color:"#33cbf6",
+    borderBottomWidth: 1,
+    borderColor: '#7f7f7f',
     fontFamily:"TwCenMTStd",
   },
   typeText:
@@ -293,8 +300,8 @@ const styles = StyleSheet.create({
   },
   profileImg:
   {
-    width:45,
-    height:45,
+    width:50,
+    height:50,
     borderRadius:50
   },
   joinActivityBtn:

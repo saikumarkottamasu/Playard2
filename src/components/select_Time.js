@@ -44,28 +44,28 @@ async timePicker(){
                     <View style={styles.sessionWrapper}>
                             <Image
                                   style={styles.sessionIcon}
-                                  source={require('.././images/profile-normal.png')} />
+                                  source={require('.././images/morning-icon.png')} />
                            <Text style={styles.sessionText}>Morning(12am to 9am)</Text>
                     </View>
                     <View style={styles.sessionWrapper}>
                             <Image
                                   style={styles.sessionIcon}
-                                  source={require('.././images/profile-normal.png')} />
+                                  source={require('.././images/day.png')} />
                            <Text style={styles.sessionText}>Day(9am to 4pm)</Text>
                     </View>
                     <View style={styles.sessionWrapper}>
                             <Image
                                   style={styles.sessionIcon}
-                                  source={require('.././images/profile-normal.png')} />
+                                  source={require('.././images/evening.png')} />
                            <Text style={styles.sessionText}>Evening(4pm to 9pm)</Text>
                     </View>
                     <View style={styles.sessionWrapper}>
                             <Image
                                   style={styles.sessionIcon}
-                                  source={require('.././images/profile-normal.png')} />
+                                  source={require('.././images/night-icon.png')} />
                            <Text style={styles.sessionText}>Night(9pm to 12am)</Text>
                     </View>
-                    <Text style={styles.addressText}>Or, you can also select a specific time</Text>
+                    <Text style={[styles.addressText,{ marginTop:20}]}>Or, you can also select a specific time</Text>
                     <View style={styles.clockWrapper}>                         
                          <View style={styles.clockContent}> 
                                 <TouchableOpacity  onPress={this.timePicker} >                   
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     fontSize:15,
     color:"#999999",
     fontFamily:"TwCenMTStd",
-    marginTop:10,
+    // marginTop:10,
     marginBottom:10
   },
   sessionText:
@@ -125,7 +125,8 @@ const styles = StyleSheet.create({
     fontSize:15,
     color:"#363f4d",
     fontFamily:"TwCenMTStd",
-    marginLeft:10
+    marginLeft:10,
+    textAlignVertical:"center"
   },
   sessionIcon:
   {

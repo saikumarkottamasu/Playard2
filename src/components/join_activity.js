@@ -1,12 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text,TextInput,TouchableOpacity,SafeAreaView,ScrollView,TouchableHighlight,Image,View } from 'react-native';
-import { Textarea } from 'native-base';
-
 
 export default class join_activity extends React.Component {
 static navigationOptions = {
        header: null,
-    };     
+    }; 
+ constructor(props) {
+   super(props);
+   this.state = {
+    value:''
+    };
+  }       
  render() 
  {
    return(
@@ -21,17 +25,30 @@ static navigationOptions = {
               </View>
               <ScrollView>
                     <View style={styles.contentBody}>
-                        <Text style={styles.additionalText}>User has been putting effortsto organize this activity.</Text>
+                        <Text style={styles.additionalText}>User has been putting efforts to organize this activity.</Text>
                         <Text style={styles.additionalText}>Please see the request if you are quite sure to attend.</Text>
-                          <Textarea rowSpan={10}  placeholder="Send a message to the host along with your request"  style={[styles.textArea,{ marginLeft:1}]}/>
-
+                        <TextInput
+                                style={styles.textArea}
+                                underlineColorAndroid="transparent"
+                                placeholder="Send a message to the host along with your request"
+                                placeholderTextColor="#7f7f7f"
+                                numberOfLines={8}
+                                multiline={true}
+                                maxLength = {1024}
+                                value={this.state.value}
+                                onChangeText={(value) => this.setState({value})}
+                              />
+                          <Text style={styles.additionalText}>
+                            {this.state.value.length} of 1024 Characters
+                         </Text>
                     </View>
+              </ScrollView>
                     <View style={styles.joinActivityBtn}>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('')}>
                                 <Text style={styles.joinActivityBtnText}>Send Request</Text>
                             </TouchableOpacity>
                     </View>
-              </ScrollView>
+              
                 
     </SafeAreaView>
      
@@ -88,13 +105,19 @@ cartHeader:
   },
   textArea:
   {
-    borderColor: '#dadada',
+    
     fontSize:16,
-    borderWidth: 1,
-    fontFamily:"TwCenMTStd",
-    marginBottom:40,
-    paddingLeft:10,
     color:"#7f7f7f",
+    textAlignVertical: 'top',
+    fontFamily:"TwCenMTStd",
+    marginBottom:5,
+    paddingLeft:20,
+    paddingTop:20,
+    elevation:1,
+    borderColor:"#dadada",
+    borderWidth:0.65,
+     borderRadius:5
+
   },
 
 });

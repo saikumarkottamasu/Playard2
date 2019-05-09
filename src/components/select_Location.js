@@ -21,20 +21,28 @@ static navigationOptions = {
                       <Text style={styles.profileText}>Select Location</Text>                                     
               </View>
               <View style={styles.contentBody}>
-                    <View style={{flexDirection:"row"}}>
-                        <Icon name='compass' size={22} color={'black'} />
+                    <View style={{flexDirection:"row",marginTop:10}}>
+                          <Image
+                              style={styles.locationImg}
+                              source={require('.././images/detect-location.png')} />
+
                         <Text style={styles.accHeaderText}>Detect Current Location</Text>
                     </View>
-                    <Item regular style={styles.searchBar}>
-                        <Input placeholder="Search by Locality/ Venue Name" style={styles.searchText}/>
-                       
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('')}>
-                          <Image
-                          style={styles.searchImg}
-                          source={require('.././images/search-icon.png')} />
-                                        
-                        </TouchableOpacity >
-                    </Item>
+                     <View style={{flexDirection:"row",margin:10}}>
+                            <TextInput
+                                  placeholder="Search by Locality/ Venue Name"
+                                  style={styles.inputField}
+                                  
+                                />  
+                            <View style={styles.eyeView}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('')}>
+                                    <Image
+                                    style={styles.searchImg}
+                                    source={require('.././images/search-icon.png')} />
+                                              
+                              </TouchableOpacity > 
+                      </View>
+                  </View>  
                     <Text style={styles.addressText}>Cafe Coffee Day- The Launge Road 12,Banjara hills,Hyderabad</Text>
                     <Text style={styles.addressText}>Cream Shakes,Opposite to Ratnadeep Super Market,Road 12,Banjara Hills,Hyderabad</Text>
                     <Text style={styles.addressText}>The Biryani Box,Sridha Anushka Pride,Road 12,Banjara Hills,Hyderabad</Text>
@@ -66,7 +74,6 @@ const styles = StyleSheet.create({
     fontFamily:"TwCenMTStd",
     fontSize:17,
     color:"#363f4d",
-    marginLeft:5
   },
   contentBody:
   {
@@ -101,10 +108,37 @@ const styles = StyleSheet.create({
   },
   searchImg:
   {
-    width:20,
-    height:20,
+    width:18,
+    height:18,
     marginRight:10
-  }
+  },
+  locationImg:
+  {
+    width:22,
+    height:22,
+    marginRight:5,
+    marginLeft:10
+  },
+
+  inputField:
+  {
+    borderColor: '#dadada',
+    fontSize:18,
+    borderWidth: 1,
+    borderRadius:5,
+    fontFamily:"TwCenMTStd",
+    marginTop:10,
+    width:"100%",
+    color:"#999999",
+    paddingLeft:10,
+    height:45
+  },
+  eyeView:
+  {
+    marginLeft:'auto',
+    marginTop:22,
+  },
+
 });
 
 

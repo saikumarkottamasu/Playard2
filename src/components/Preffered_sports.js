@@ -159,6 +159,30 @@ static navigationOptions = {
                                                   source={require('.././images/basket-ball.png')} /> 
                                                 <Text style={styles.bodyText}>Basket Ball</Text>
                                             </View>
+                                            <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/cricket.png')} /> 
+                                                  <Text style={styles.bodyText}>Volleyball</Text>
+                                            </View>
+                                            <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/basket-ball.png')} /> 
+                                                <Text style={styles.bodyText}>Hockey</Text>
+                                            </View>
+                                            <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/cricket.png')} /> 
+                                                  <Text style={styles.bodyText}>Ultimate Frisbee</Text>
+                                            </View>
+                                            <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/basket-ball.png')} /> 
+                                                <Text style={styles.bodyText}>Box-Cricket</Text>
+                                            </View>
                                             
                                       </View>
                                       <View style={styles.inlineWrapper}>
@@ -168,7 +192,36 @@ static navigationOptions = {
                                                   source={require('.././images/foot-ball.png')} /> 
                                                   <Text style={styles.bodyText}>Football</Text>
                                             </View>
-                                                                                                                                                                              
+                                            <View style={styles.itemWrapper2}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/table-tennis.png')} /> 
+                                                <Text style={styles.bodyText}>Table Tennis</Text>
+                                            </View> 
+                                            <View style={styles.itemWrapper2}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/cricket.png')} /> 
+                                                  <Text style={styles.bodyText}>Rugby</Text>
+                                            </View>
+                                            <View style={styles.itemWrapper2}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/basket-ball.png')} /> 
+                                                <Text style={styles.bodyText}>Kabaddi</Text>
+                                            </View> 
+                                            <View style={styles.itemWrapper2}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/cricket.png')} /> 
+                                                  <Text style={styles.bodyText}>Handball</Text>
+                                            </View>
+                                            <View style={styles.itemWrapper2}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/basket-ball.png')} /> 
+                                                <Text style={styles.bodyText}>Throw Ball</Text>
+                                            </View>                                                                                                                               
                                       </View>
                                 </View>
                             </CollapseBody>
@@ -201,6 +254,18 @@ static navigationOptions = {
                                                   source={require('.././images/badminton.png')} /> 
                                                 <Text style={styles.bodyText}>Badminton</Text>
                                             </View>
+                                            <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/table-tennis.png')} /> 
+                                                <Text style={styles.bodyText}>Table Tennis</Text>
+                                            </View>
+                                             <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/table-tennis.png')} /> 
+                                                <Text style={styles.bodyText}>Pickelball</Text>
+                                            </View>
                                       </View>
                                       <View style={styles.inlineWrapper}>
                                            
@@ -210,6 +275,19 @@ static navigationOptions = {
                                                   source={require('.././images/tennis.png')} /> 
                                                   <Text style={styles.bodyText}>Tennis</Text>
                                             </View>
+                                            <View style={styles.itemWrapper2}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/cricket.png')} /> 
+                                                  <Text style={styles.bodyText}>Squash</Text>
+                                            </View>
+                                            <View style={styles.itemWrapper2}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/basket-ball.png')} /> 
+                                                <Text style={styles.bodyText}>Padel</Text>
+                                            </View>
+
                                             
                                       </View>
                                 </View>
@@ -243,6 +321,24 @@ static navigationOptions = {
                                                   source={require('.././images/running.png')} /> 
                                                   <Text style={styles.bodyText}>Running</Text>
                                             </View>
+                                            <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/running.png')} /> 
+                                                  <Text style={styles.bodyText}>Yoga</Text>
+                                            </View>
+                                            <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/running.png')} /> 
+                                                  <Text style={styles.bodyText}>Workout</Text>
+                                            </View>
+                                            <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/running.png')} /> 
+                                                  <Text style={styles.bodyText}>combat Sports</Text>
+                                            </View>
                                       </View>
                                       <View style={styles.inlineWrapper}>
                                             <View style={styles.itemWrapper2}>
@@ -250,6 +346,18 @@ static navigationOptions = {
                                                   style={styles.sportIconImg}
                                                   source={require('.././images/cycling.png')} /> 
                                                   <Text style={styles.bodyText}>Cycling</Text>
+                                            </View>
+                                            <View style={styles.itemWrapper2}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/running.png')} /> 
+                                                  <Text style={styles.bodyText}>Swimming</Text>
+                                            </View>
+                                            <View style={styles.itemWrapper2}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/running.png')} /> 
+                                                  <Text style={styles.bodyText}>Gumming</Text>
                                             </View>
                                             
                                       </View>
@@ -282,7 +390,37 @@ static navigationOptions = {
                                                 <Image
                                                   style={styles.sportIconImg}
                                                   source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Running</Text>
+                                                  <Text style={styles.bodyText}>Bowling</Text>
+                                            </View>
+                                             <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/running.png')} /> 
+                                                  <Text style={styles.bodyText}>Pool</Text>
+                                            </View>
+                                             <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/running.png')} /> 
+                                                  <Text style={styles.bodyText}>Fun Sports</Text>
+                                            </View>
+                                             <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/running.png')} /> 
+                                                  <Text style={styles.bodyText}>Adventure Sports</Text>
+                                            </View>
+                                             <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/running.png')} /> 
+                                                  <Text style={styles.bodyText}>Extrem</Text>
+                                            </View>
+                                             <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/running.png')} /> 
+                                                  <Text style={styles.bodyText}>Cue Sports</Text>
                                             </View>
                                       </View>
                                       <View style={styles.inlineWrapper}>
@@ -290,7 +428,31 @@ static navigationOptions = {
                                                 <Image
                                                   style={styles.sportIconImg}
                                                   source={require('.././images/cycling.png')} /> 
-                                                  <Text style={styles.bodyText}>Cycling</Text>
+                                                  <Text style={styles.bodyText}>Golf</Text>
+                                            </View>
+                                             <View style={styles.itemWrapper2}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/running.png')} /> 
+                                                  <Text style={styles.bodyText}>Water Sports</Text>
+                                            </View>
+                                             <View style={styles.itemWrapper2}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/running.png')} /> 
+                                                  <Text style={styles.bodyText}>Human Foosball</Text>
+                                            </View>
+                                             <View style={styles.itemWrapper2}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/running.png')} /> 
+                                                  <Text style={styles.bodyText}>Chess</Text>
+                                            </View>
+                                             <View style={styles.itemWrapper2}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/running.png')} /> 
+                                                  <Text style={styles.bodyText}>Carrom</Text>
                                             </View>
                                             
                                       </View>
@@ -330,6 +492,8 @@ subHeaderText:
     fontFamily:"TwCenMTStd",
     color:"#999999",
     fontSize:16,
+    marginTop:5,
+    marginBottom:20
   },
 accordionContainer:
   {
@@ -358,7 +522,8 @@ itemWrapper:
   {
     flexDirection:"row",
     marginTop:10,
-    marginLeft:10
+    marginLeft:10,
+    marginBottom:5
   },
   accBody:
   {
@@ -367,7 +532,8 @@ itemWrapper:
 itemWrapper2:
   {
     flexDirection:"row",
-    marginTop:10
+    marginTop:10,
+    marginBottom:5
   },
 bodyText:
   {

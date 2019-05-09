@@ -1,3 +1,24 @@
- export const userNameKey= '@myApp:username';
+import React from 'react';
+import { StyleSheet, Text,SafeAreaView,TextInput,TouchableOpacity,ScrollView,TouchableHighlight,Image,View } from 'react-native';
 
- export const mobileNumberKey= 'mobileNumber';
+
+export default class Explore extends React.Component {
+static navigationOptions = {
+       header: null,
+    };     
+ render() 
+ {
+   return(
+    <SafeAreaView>
+            <Text>Helll</Text>     
+                
+    </SafeAreaView>
+     
+   );
+ }
+}
+const styles = StyleSheet.create({
+
+});
+
+
