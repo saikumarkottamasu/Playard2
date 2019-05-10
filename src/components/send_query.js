@@ -27,7 +27,7 @@ static navigationOptions = {
               </View>
               <ScrollView> 
                       <View style={styles.contentBody}>
-                          <Text style={styles.additionalText}>Need more details? send a query.It will help the host user
+                          <Text style={styles.additionalText}>Need more details? send a query. It will help the host user
                               improve the Activity instructions</Text>
                               <TextInput
                                 style={styles.textArea}
@@ -101,7 +101,7 @@ cartHeader:
     fontSize:20 ,
     color:'#fff',
     textAlign:"center",
-    padding:5,
+    padding:10,
     fontFamily:"TwCenMTStd"
   },
   textArea:

@@ -102,14 +102,15 @@ export default class Profile extends Component {
                               </View>
                         </View>
                     </View>
-                    <View style={{flexDirection:"row",marginTop:10}}>
+                    <View style={styles.profileContent}>
                               <Image
                                       style={styles.profileImg}
-                                      source={require('.././images/3.jpg')}
+                                      source={require('.././images/user-icon.png')}
                               /> 
                               <View style={styles.titleContent}>
                                     <Text style={styles.titleText}>Neeraja</Text>
                                     <Text style={styles.underlineText}>Intermediate</Text>
+
                               </View>
                               <View style={styles.goingContent}>
                                   <View style={{marginLeft:'auto'}}>
@@ -148,17 +149,17 @@ export default class Profile extends Component {
                               </View>
                         </View>
                     </View>
-                    <View style={{flexDirection:"row",marginTop:10,alignItems:"center"}}>
+                     <View style={styles.profileContent}>
                               <Image
                                       style={styles.profileImg}
-                                      source={require('.././images/3.jpg')}
+                                      source={require('.././images/user-icon.png')}
                               /> 
                               <View style={styles.titleContent}>
                                     <Text style={styles.titleText}>Parvathi</Text>
                                     <Text style={styles.underlineText}>Beginner</Text>
                               </View>
                               <View style={styles.goingContent}>
-                                  <View style={{marginLeft:'auto'}}>
+                                  <View style={{marginLeft:'auto',marginTop:10}}>
                                              <Image
                                             style={styles.goingImg}
                                             source={require('.././images/lock-icon.png')} />                                                                                                               
@@ -192,14 +193,15 @@ export default class Profile extends Component {
                               </View>
                         </View>
                     </View>
-                    <View style={{flexDirection:"row",marginTop:10}}>
+                    <View style={styles.profileContent}>
                               <Image
                                       style={styles.profileImg}
-                                      source={require('.././images/3.jpg')}
+                                      source={require('.././images/user-icon.png')}
                               /> 
                               <View style={styles.titleContent}>
                                     <Text style={styles.titleText}>Neeraja</Text>
                                     <Text style={styles.underlineText}>Intermediate</Text>
+
                               </View>
                               <View style={styles.goingContent}>
                                   <View style={{marginLeft:'auto'}}>
@@ -293,6 +295,12 @@ profileImg:{
     borderBottomWidth: 3,
     paddingBottom:3
   },
+  profileContent:
+  {
+    flexDirection:"row",
+    marginTop:10,
+    alignItems: 'center'
+  },
 headerText:
   {
     fontSize: 16,
@@ -360,13 +368,13 @@ headerText:
   {
     color:"#7f7f7f",
     fontFamily:"TwCenMTStd",
-    fontSize:15,
+    fontSize:14,
   },
   goingContent:
   {
     flexDirection:"column",
     marginLeft:'auto',
-
+    // alignItems:"center"
   },
   dateContent:
   {
@@ -398,9 +406,8 @@ headerText:
     color:"#33cbf6",
     fontFamily:"TwCenMTStd",
     fontSize:13,
-    color :'skyblue',
     borderBottomWidth:0.65,
-    borderColor:"#33cbf6"
+    borderColor:"#7f7f7f"
   },
 
 });

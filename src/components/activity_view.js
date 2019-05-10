@@ -51,10 +51,10 @@ static navigationOptions = {
                     <Text style={styles.upcomingText}>Activity Instructions</Text>
                     <View style={styles.clockWrapper}>                         
                          <View style={styles.clockContent}> 
-                                <Text style={styles.startText}>1-  2</Text>
+                                <Text style={styles.startText}>1 -  2</Text>
                                 <Text style={styles.clockTimeText}>Beginner - Amateur</Text>
                           </View>
-                         <View style={styles.clockContent}>
+                         <View style={styles.clockContent2}>
                                <Text style={styles.startText}>4</Text>
                                <Text style={styles.clockTimeText}>Required Players</Text>
                         </View>
@@ -214,17 +214,22 @@ const styles = StyleSheet.create({
   },
   clockContent:
   {
+    paddingTop:10,
+    paddingBottom:10,
+    width:"45%",
+  },
+  clockContent2:
+  {
     alignItems:"center",
-    padding:10,
-    width:"50%",
-    borderRadius:5,   
+     paddingTop:10,
+    paddingBottom:10,
+    width:"55%",
   },
   clockTimeText:
   {
     fontSize:16,
     color:"#7f7f7f",
     fontFamily:"TwCenMTStd",
-    textAlign:"center",
     marginTop:5
   },
   startText:
@@ -275,8 +280,6 @@ const styles = StyleSheet.create({
     width:"50%",
     flexDirection:"row",
     alignItems: 'center' ,
-
-
   },
   nameText:
   {

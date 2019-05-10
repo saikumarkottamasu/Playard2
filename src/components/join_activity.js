@@ -100,19 +100,18 @@ cartHeader:
     fontSize:20 ,
     color:'#fff',
     textAlign:"center",
-    padding:5,
+    padding:10,
     fontFamily:"TwCenMTStd"
   },
   textArea:
-  {
-    
+  {   
     fontSize:16,
     color:"#7f7f7f",
     textAlignVertical: 'top',
     fontFamily:"TwCenMTStd",
     marginBottom:5,
-    paddingLeft:20,
-    paddingTop:20,
+    paddingLeft:10,
+    paddingTop:10,
     elevation:1,
     borderColor:"#dadada",
     borderWidth:0.65,

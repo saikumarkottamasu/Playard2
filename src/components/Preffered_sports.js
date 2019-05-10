@@ -58,7 +58,6 @@ static navigationOptions = {
                         </TouchableOpacity > 
                       </View>
                   </View>
-                   <ScrollView>             
                   <View style={styles.accordionContainer}>
                    
                       <Collapse>                    
@@ -76,13 +75,14 @@ static navigationOptions = {
                               </View>
                             </CollapseHeader>
                             <CollapseBody >
-                              
+                              <ScrollView>
                                 <View style={{flexDirection: 'row',marginLeft:'auto'}} >
                                     <CheckBox
                                       value={this.state.checked2}
                                       onValueChange={() => this.setState({ checked2: !this.state.checked2 })} />
                                     <Text style={styles.selectText}>Select All</Text>
                                 </View>
+                                 </ScrollView>
                                 <View style={styles.accBody}>
 
                                       <View style={styles.inlineWrapper}>
@@ -163,14 +163,12 @@ static navigationOptions = {
                                             
                                       </View>
                                 </View>
-                               
+                              
                             </CollapseBody>
                       </Collapse>
 
                 </View>
-                 </ScrollView>
-
-                <View style={styles.accordionContainer}>
+                  <View style={styles.accordionContainer}>
                       <Collapse>                    
                             <CollapseHeader style={styles.accHeader}>
                               <View style={{flexDirection:"row",alignItems:"center"}}>
@@ -401,6 +399,7 @@ static navigationOptions = {
                       </Collapse>
                 </View>
 
+
                 <View style={styles.signInBtn}>
                       <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
                             <Text style={styles.signInBtnText}>SAVE</Text>
@@ -445,7 +444,8 @@ accordionContainer:
   },
 accHeader:
  {
-  flexDirection:"row",  
+  flexDirection:"row", 
+  alignItems:"center" 
  },
 iconContainer:
   {

@@ -51,19 +51,19 @@ async timePicker(){
                             <Image
                                   style={styles.sessionIcon}
                                   source={require('.././images/day.png')} />
-                           <Text style={styles.sessionText}>Day(9am to 4pm)</Text>
+                           <Text style={styles.sessionText}>Day( 9am to 4pm)</Text>
                     </View>
                     <View style={styles.sessionWrapper}>
                             <Image
                                   style={styles.sessionIcon}
                                   source={require('.././images/evening.png')} />
-                           <Text style={styles.sessionText}>Evening(4pm to 9pm)</Text>
+                           <Text style={styles.sessionText}>Evening( 4pm to 9pm)</Text>
                     </View>
                     <View style={styles.sessionWrapper}>
                             <Image
                                   style={styles.sessionIcon}
                                   source={require('.././images/night-icon.png')} />
-                           <Text style={styles.sessionText}>Night(9pm to 12am)</Text>
+                           <Text style={styles.sessionText}>Night( 9pm to 12am)</Text>
                     </View>
                     <Text style={[styles.addressText,{ marginTop:20}]}>Or, you can also select a specific time</Text>
                     <View style={styles.clockWrapper}>                         
@@ -72,6 +72,8 @@ async timePicker(){
                                      <Text style={styles.startText}>Start Time</Text>
                                      <Text style={styles.clockTimeText}>12.00PM</Text>
                                 </TouchableOpacity>
+                          </View>
+                          <View style={{width:"5%"}}>
                           </View>
                          <View style={styles.clockContent}>
                               <TouchableOpacity  onPress={this.timePicker} >                      
@@ -149,7 +151,9 @@ const styles = StyleSheet.create({
     flexDirection:"row",
     justifyContent:"center",
     marginTop:10,
-    marginBottom:10
+    marginBottom:10,
+    // backgroundColor:"pink",
+    width:"100%"
   },
   clockContent:
   {
@@ -158,11 +162,9 @@ const styles = StyleSheet.create({
     elevation:1,
     alignItems:"center",
     padding:10,
-    width:"40%",
+    width:"47%",
     borderRadius:5,
-    marginLeft:10,
-    marginRight:10
-    // backgroundColor:"pink"
+   
     
   },
   clockTimeText:
