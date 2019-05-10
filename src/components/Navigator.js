@@ -45,7 +45,7 @@ import Splashscreen from './Splashscreen';
 		Splashscreen: { screen: Splashscreen },	
 	},
 	{
-    initialRouteName: 'activity_view',
+    	initialRouteName: 'Preffered_sports',
   	}
 
 );

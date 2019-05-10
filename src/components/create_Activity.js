@@ -60,7 +60,7 @@ onValueChange(value: string) {
                                       <TouchableHighlight onPress={() => this.props.navigation.navigate('select_Sports')}>                                                         
                                              <Image
                                             style={styles.rightImg}
-                                            source={require('.././images/black-rightarrow.png')} />                                                                                                               
+                                            source={require('.././images/black-rightarrow.png')} /> 
                                      </TouchableHighlight>  
                                 </View>
                             </View>
@@ -176,8 +176,9 @@ const styles = StyleSheet.create({
   {
     width:15,
     height:15,
-    // padding:10,
-    
+    // padding:10,   
+    // alignSelf: 'flex-start',
+    // flex:1, 
     // backgroundColor:"pink"
   },
 

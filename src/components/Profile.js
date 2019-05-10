@@ -148,7 +148,7 @@ export default class Profile extends Component {
                               </View>
                         </View>
                     </View>
-                    <View style={{flexDirection:"row",marginTop:10}}>
+                    <View style={{flexDirection:"row",marginTop:10,alignItems:"center"}}>
                               <Image
                                       style={styles.profileImg}
                                       source={require('.././images/3.jpg')}

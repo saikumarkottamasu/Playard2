@@ -18,10 +18,21 @@ static navigationOptions = {
   constructor(props) {
     super(props);
     this.state = {
+      status:true,
     }
   }
 
+  ShowHideBlueIconView = () =>{
 
+  if(this.state.status == true)
+  {
+    this.setState({status: false})
+  }
+  else
+  {
+    this.setState({status: true})
+  }
+}
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -46,13 +57,17 @@ static navigationOptions = {
                                         
                         </TouchableOpacity > 
                       </View>
-                  </View>             
-
+                  </View>
+                   <ScrollView>             
                   <View style={styles.accordionContainer}>
+                   
                       <Collapse>                    
                             <CollapseHeader style={styles.accHeader}>
-                              <View>
+                              <View style={{flexDirection:"row",alignItems:"center"}}>
                                 <Text style={styles.accHeaderText}>Popular Sports</Text>
+                                <Image
+                                    style={styles.checkedGreenImg}
+                                    source={require('.././images/checked-icon.png')} />  
                               </View>
                               <View style={styles.iconContainer}>
                                 <Image
@@ -61,6 +76,7 @@ static navigationOptions = {
                               </View>
                             </CollapseHeader>
                             <CollapseBody >
+                              
                                 <View style={{flexDirection: 'row',marginLeft:'auto'}} >
                                     <CheckBox
                                       value={this.state.checked2}
@@ -68,13 +84,30 @@ static navigationOptions = {
                                     <Text style={styles.selectText}>Select All</Text>
                                 </View>
                                 <View style={styles.accBody}>
+
                                       <View style={styles.inlineWrapper}>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/badminton.png')} /> 
-                                                <Text style={styles.bodyText}>Badminton</Text>
-                                            </View>
+                                            
+
+                                                <View style={styles.itemWrapper}>
+                                                    <TouchableOpacity onPress={this.ShowHideBlueIconView}>
+                                                       <View style={{flexDirection:"row"}}>
+                                                        <Image
+                                                          style={styles.sportIconImg}
+                                                          source={require('.././images/badminton.png')} /> 
+                                                        <Text style={styles.bodyText}>Badminton</Text>
+                                                      </View>
+                                                    </TouchableOpacity>
+                                                     <View>
+                                                              {
+                                                                    this.state.status ? <Text></Text> 
+                                                                    : 
+                                                                          <View style={styles.blueIcon}>
+                                                                          </View>
+                                                              }
+                                                    </View>
+                                                    
+                                                </View>
+                                            
                                             <View style={styles.itemWrapper}>
                                                 <Image
                                                   style={styles.sportIconImg}
@@ -86,12 +119,16 @@ static navigationOptions = {
                                                   style={styles.sportIconImg}
                                                   source={require('.././images/table-tennis.png')} /> 
                                                 <Text style={styles.bodyText}>Table Tennis</Text>
+                                                <View style={styles.blueIcon}>
+                                                </View>
                                             </View>
                                             <View style={styles.itemWrapper}>
                                                 <Image
                                                   style={styles.sportIconImg}
                                                   source={require('.././images/running.png')} /> 
                                                   <Text style={styles.bodyText}>Running</Text>
+                                                   <View style={styles.blueIcon}>
+                                                  </View>
                                             </View>
                                       </View>
                                       <View style={styles.inlineWrapper}>
@@ -106,6 +143,8 @@ static navigationOptions = {
                                                   style={styles.sportIconImg}
                                                   source={require('.././images/tennis.png')} /> 
                                                   <Text style={styles.bodyText}>Tennis</Text>
+                                                  <View style={styles.blueIcon}>
+                                                </View>
                                             </View>
                                             <View style={styles.itemWrapper2}>
                                                 <Image
@@ -118,18 +157,150 @@ static navigationOptions = {
                                                   style={styles.sportIconImg}
                                                   source={require('.././images/cycling.png')} /> 
                                                   <Text style={styles.bodyText}>Cycling</Text>
+                                                   <View style={styles.blueIcon}>
+                                                  </View>
                                             </View>
+                                            
+                                      </View>
+                                </View>
+                               
+                            </CollapseBody>
+                      </Collapse>
+
+                </View>
+                 </ScrollView>
+
+                <View style={styles.accordionContainer}>
+                      <Collapse>                    
+                            <CollapseHeader style={styles.accHeader}>
+                              <View style={{flexDirection:"row",alignItems:"center"}}>
+                                <Text style={styles.accHeaderText}>Team Sports</Text>
+                                <Image
+                                    style={styles.checkedGreenImg}
+                                    source={require('.././images/checked-icon.png')} />  
+                              </View>
+                              <View style={styles.iconContainer}>
+                                <Image
+                                    style={styles.dropdownImg}
+                                    source={require('.././images/black-downarrow.png')} />  
+                              </View>
+                            </CollapseHeader>
+                            <CollapseBody >
+                               <View style={{flexDirection: 'row',marginLeft:'auto'}} >
+                                    <CheckBox
+                                      value={this.state.checked2}
+                                      onValueChange={() => this.setState({ checked2: !this.state.checked2 })} />
+                                    <Text style={styles.selectText}>Select All</Text>
+                                </View>
+                                <View style={styles.accBody}>
+                                      <View style={styles.inlineWrapper}>
+                                           
+                                            <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/cricket.png')} /> 
+                                                  <Text style={styles.bodyText}>Cricket</Text>
+                                            </View>
+                                            <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/table-tennis.png')} /> 
+                                                <Text style={styles.bodyText}>Table Tennis</Text>
+                                                <View style={styles.blueIcon}>
+                                                </View>
+                                            </View>
+
+                                      </View>
+                                      <View style={styles.inlineWrapper}>
+                                            <View style={styles.itemWrapper2}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/foot-ball.png')} /> 
+                                                  <Text style={styles.bodyText}>Football</Text>
+                                            </View>
+                                           
+                                            <View style={styles.itemWrapper2}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/basket-ball.png')} /> 
+                                                  <Text style={styles.bodyText}>Basket Ball</Text>
+                                            </View>
+                                           
                                             
                                       </View>
                                 </View>
                             </CollapseBody>
                       </Collapse>
                 </View>
-                <View style={styles.accordionContainer}>
+                  <View style={styles.accordionContainer}>
                       <Collapse>                    
                             <CollapseHeader style={styles.accHeader}>
-                              <View>
-                                <Text style={styles.accHeaderText}>Team Sports</Text>
+                              <View style={{flexDirection:"row",alignItems:"center"}}>
+                                <Text style={styles.accHeaderText}>Racquet Sports</Text>
+                                <Image
+                                    style={styles.checkedGreenImg}
+                                    source={require('.././images/checked-icon.png')} />  
+                              </View>
+                              <View style={styles.iconContainer}>
+                                <Image
+                                    style={styles.dropdownImg}
+                                    source={require('.././images/black-downarrow.png')} />  
+                              </View>
+                            </CollapseHeader>
+                            <CollapseBody >
+                               <View style={{flexDirection: 'row',marginLeft:'auto'}} >
+                                    <CheckBox
+                                      value={this.state.checked2}
+                                      onValueChange={() => this.setState({ checked2: !this.state.checked2 })} />
+                                    <Text style={styles.selectText}>Select All</Text>
+                                </View>
+                                <View style={styles.accBody}>
+                                      <View style={styles.inlineWrapper}>
+                                            <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/badminton.png')} /> 
+                                                <Text style={styles.bodyText}>Badminton</Text>
+                                                <View style={styles.blueIcon}>
+                                                </View>
+                                            </View>
+                                            
+                                            <View style={styles.itemWrapper}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/table-tennis.png')} /> 
+                                                <Text style={styles.bodyText}>Table Tennis</Text>
+                                                <View style={styles.blueIcon}>
+                                                </View>
+                                            </View>
+                                            
+                                      </View>
+                                      <View style={styles.inlineWrapper}>
+                                            
+                                            <View style={styles.itemWrapper2}>
+                                                <Image
+                                                  style={styles.sportIconImg}
+                                                  source={require('.././images/tennis.png')} /> 
+                                                  <Text style={styles.bodyText}>Tennis</Text>
+                                                  <View style={styles.blueIcon}>
+                                                 
+                                                </View>
+                                            </View>
+                                            
+                                            
+                                      </View>
+                                </View>
+                            </CollapseBody>
+                      </Collapse>
+                </View>
+                  <View style={styles.accordionContainer}>
+                      <Collapse>                    
+                            <CollapseHeader style={styles.accHeader}>
+                              <View style={{flexDirection:"row",alignItems:"center"}}>
+                                <Text style={styles.accHeaderText}>Fitness Sports</Text>
+                                <Image
+                                    style={styles.checkedGreenImg}
+                                    source={require('.././images/checked-icon.png')} />  
                               </View>
                               <View style={styles.iconContainer}>
                                 <Image
@@ -146,82 +317,29 @@ static navigationOptions = {
                                 </View>
                                 <View style={styles.accBody}>
                                       <View style={styles.inlineWrapper}>
+                                           
                                             
                                             <View style={styles.itemWrapper}>
                                                 <Image
                                                   style={styles.sportIconImg}
-                                                  source={require('.././images/cricket.png')} /> 
-                                                  <Text style={styles.bodyText}>Cricket</Text>
+                                                  source={require('.././images/running.png')} /> 
+                                                  <Text style={styles.bodyText}>Running</Text>
+                                                   <View style={styles.blueIcon}>
+                                                  </View>
                                             </View>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/basket-ball.png')} /> 
-                                                <Text style={styles.bodyText}>Basket Ball</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/cricket.png')} /> 
-                                                  <Text style={styles.bodyText}>Volleyball</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/basket-ball.png')} /> 
-                                                <Text style={styles.bodyText}>Hockey</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/cricket.png')} /> 
-                                                  <Text style={styles.bodyText}>Ultimate Frisbee</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/basket-ball.png')} /> 
-                                                <Text style={styles.bodyText}>Box-Cricket</Text>
-                                            </View>
-                                            
                                       </View>
                                       <View style={styles.inlineWrapper}>
+                                          
+                                            
                                             <View style={styles.itemWrapper2}>
                                                 <Image
                                                   style={styles.sportIconImg}
-                                                  source={require('.././images/foot-ball.png')} /> 
-                                                  <Text style={styles.bodyText}>Football</Text>
+                                                  source={require('.././images/cycling.png')} /> 
+                                                  <Text style={styles.bodyText}>Cycling</Text>
+                                                   <View style={styles.blueIcon}>
+                                                  </View>
                                             </View>
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/table-tennis.png')} /> 
-                                                <Text style={styles.bodyText}>Table Tennis</Text>
-                                            </View> 
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/cricket.png')} /> 
-                                                  <Text style={styles.bodyText}>Rugby</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/basket-ball.png')} /> 
-                                                <Text style={styles.bodyText}>Kabaddi</Text>
-                                            </View> 
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/cricket.png')} /> 
-                                                  <Text style={styles.bodyText}>Handball</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/basket-ball.png')} /> 
-                                                <Text style={styles.bodyText}>Throw Ball</Text>
-                                            </View>                                                                                                                               
+                                            
                                       </View>
                                 </View>
                             </CollapseBody>
@@ -230,8 +348,9 @@ static navigationOptions = {
                 <View style={styles.accordionContainer}>
                       <Collapse>                    
                             <CollapseHeader style={styles.accHeader}>
-                              <View>
-                                <Text style={styles.accHeaderText}>Racquet Sports</Text>
+                              <View style={{flexDirection:"row",alignItems:"center"}}>
+                                <Text style={styles.accHeaderText}>Recreation Sports</Text>
+                                
                               </View>
                               <View style={styles.iconContainer}>
                                 <Image
@@ -252,208 +371,29 @@ static navigationOptions = {
                                                 <Image
                                                   style={styles.sportIconImg}
                                                   source={require('.././images/badminton.png')} /> 
-                                                <Text style={styles.bodyText}>Badminton</Text>
+                                                <Text style={styles.bodyText}>Yoga</Text>
+                                               
                                             </View>
+                                            
                                             <View style={styles.itemWrapper}>
                                                 <Image
                                                   style={styles.sportIconImg}
                                                   source={require('.././images/table-tennis.png')} /> 
-                                                <Text style={styles.bodyText}>Table Tennis</Text>
+                                                <Text style={styles.bodyText}>Swimming</Text>
+                                                
                                             </View>
-                                             <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/table-tennis.png')} /> 
-                                                <Text style={styles.bodyText}>Pickelball</Text>
-                                            </View>
+                                            
                                       </View>
                                       <View style={styles.inlineWrapper}>
-                                           
+                                            
                                             <View style={styles.itemWrapper2}>
                                                 <Image
                                                   style={styles.sportIconImg}
                                                   source={require('.././images/tennis.png')} /> 
-                                                  <Text style={styles.bodyText}>Tennis</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/cricket.png')} /> 
-                                                  <Text style={styles.bodyText}>Squash</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/basket-ball.png')} /> 
-                                                <Text style={styles.bodyText}>Padel</Text>
-                                            </View>
-
-                                            
-                                      </View>
-                                </View>
-                            </CollapseBody>
-                      </Collapse>
-                </View>
-                  <View style={styles.accordionContainer}>
-                      <Collapse>                    
-                            <CollapseHeader style={styles.accHeader}>
-                              <View>
-                                <Text style={styles.accHeaderText}>Fitness Sports</Text>
-                              </View>
-                              <View style={styles.iconContainer}>
-                                <Image
-                                    style={styles.dropdownImg}
-                                    source={require('.././images/black-downarrow.png')} />  
-                              </View>
-                            </CollapseHeader>
-                            <CollapseBody >
-                                <View style={{flexDirection: 'row',marginLeft:'auto'}} >
-                                    <CheckBox
-                                      value={this.state.checked2}
-                                      onValueChange={() => this.setState({ checked2: !this.state.checked2 })} />
-                                    <Text style={styles.selectText}>Select All</Text>
-                                </View>
-                                <View style={styles.accBody}>
-                                      <View style={styles.inlineWrapper}>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Running</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Yoga</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Workout</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>combat Sports</Text>
-                                            </View>
-                                      </View>
-                                      <View style={styles.inlineWrapper}>
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/cycling.png')} /> 
-                                                  <Text style={styles.bodyText}>Cycling</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Swimming</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Gumming</Text>
-                                            </View>
-                                            
-                                      </View>
-                                </View>
-                            </CollapseBody>
-                      </Collapse>
-                </View>
-                  <View style={styles.accordionContainer}>
-                      <Collapse>                    
-                            <CollapseHeader style={styles.accHeader}>
-                              <View>
-                                <Text style={styles.accHeaderText}>Recreation Sports</Text>
-                              </View>
-                              <View style={styles.iconContainer}>
-                                <Image
-                                    style={styles.dropdownImg}
-                                    source={require('.././images/black-downarrow.png')} />  
-                              </View>
-                            </CollapseHeader>
-                            <CollapseBody >
-                                <View style={{flexDirection: 'row',marginLeft:'auto'}} >
-                                    <CheckBox
-                                      value={this.state.checked2}
-                                      onValueChange={() => this.setState({ checked2: !this.state.checked2 })} />
-                                    <Text style={styles.selectText}>Select All</Text>
-                                </View>
-                                <View style={styles.accBody}>
-                                      <View style={styles.inlineWrapper}>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Bowling</Text>
-                                            </View>
-                                             <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Pool</Text>
-                                            </View>
-                                             <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Fun Sports</Text>
-                                            </View>
-                                             <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Adventure Sports</Text>
-                                            </View>
-                                             <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Extrem</Text>
-                                            </View>
-                                             <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Cue Sports</Text>
-                                            </View>
-                                      </View>
-                                      <View style={styles.inlineWrapper}>
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/cycling.png')} /> 
-                                                  <Text style={styles.bodyText}>Golf</Text>
-                                            </View>
-                                             <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Water Sports</Text>
-                                            </View>
-                                             <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Human Foosball</Text>
-                                            </View>
-                                             <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
                                                   <Text style={styles.bodyText}>Chess</Text>
+                                                  
                                             </View>
-                                             <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Carrom</Text>
-                                            </View>
+                                            
                                             
                                       </View>
                                 </View>
@@ -523,7 +463,8 @@ itemWrapper:
     flexDirection:"row",
     marginTop:10,
     marginLeft:10,
-    marginBottom:5
+    marginBottom:5,
+    alignItems:"center"
   },
   accBody:
   {
@@ -533,7 +474,8 @@ itemWrapper2:
   {
     flexDirection:"row",
     marginTop:10,
-    marginBottom:5
+    marginBottom:5,
+    alignItems:"center"
   },
 bodyText:
   {
@@ -608,5 +550,21 @@ inputField:
     marginLeft:'auto',
     marginTop:22,
   },
+  blueIcon:
+{
+  height:8,
+  width:8,
+  backgroundColor:"#33cbf6",
+  borderRadius:50,
+  marginLeft:5,
+ 
+},
+checkedGreenImg:
+  {
+    width:12,
+    height:12,
+    marginLeft:5
+  },
+
 });
 
