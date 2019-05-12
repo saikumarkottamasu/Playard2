@@ -45,7 +45,7 @@ import Splashscreen from './Splashscreen';
 		Splashscreen: { screen: Splashscreen },
 	},
 	{
-    	initialRouteName: 'create_Activity',
+    	initialRouteName: 'signUp',
   	}
 
 );

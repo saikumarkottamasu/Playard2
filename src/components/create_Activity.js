@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet,Picker, Text,TextInput,Switch,TouchableOpacity,TouchableHighlight,ScrollView,SafeAreaView,Image,View } from 'react-native';
+import { StyleSheet,Picker, Text,TextInput,Switch,TouchableOpacity,TouchableHighlight,ScrollView,SafeAreaView,Image,View, Alert, ActivityIndicator } from 'react-native';
+var GLOBAL = require('.././config/global.js');
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class create_Activity extends React.Component {
 static navigationOptions = {
@@ -22,6 +24,8 @@ static navigationOptions = {
               skillType: '',
               timeslot: '',
               notifyFriends: false,
+              spinnerVisibility: false,
+              loadingMessage: '',
 
             };
 
@@ -40,8 +44,156 @@ static navigationOptions = {
     });
   }
 
+  spinnerComponent() {
+        if(this.state.spinnerVisibility){
+        return (
+          <View style={{ flex: 1, position: 'absolute', top: 0, left: 0,right: 0, bottom: 0, alignItems: "center", justifyContent: "center"}}>
+              <View style={{ flexDirection: 'row', overflow: 'hidden',borderRadius: 16, backgroundColor: "grey" }}>
+                  <ActivityIndicator color='#ffffff' style={{ padding: 4}} visibility={true} animating={this.state.spinnerVisibility} />
+                  {
+                      this.state.loadingMessage != '' ?
+                          <Text style={{ fontSize: 16, color: '#FFFFFF',padding: 4, marginRight: 4 }}>{this.state.loadingMessage}</Text> :
+                          null
+                  }
+              </View>
+          </View>
+        );
+      }
+      }
+
+createActivity(){
+  console.log("@@@",GLOBAL.user_id);
+  this.setState({sportId:GLOBAL.sport})
+  console.log("%%%%",this.state);
+  let formData = new FormData();
+  if(GLOBAL.sport == ''){
+    Alert.alert(
+      'Error',
+      'Please select a game to create activity',
+      [
+        {text: 'ok'}
+      ],
+      { cancelable: true }
+    )
+  }
+  else if(this.state.venueId == '' || this.state.locality == ''){
+    Alert.alert(
+      'Error',
+      'Please select a venue or location to create activity',
+      [
+        {text: 'ok'}
+      ],
+      { cancelable: true }
+    )
+  }
+  else if(this.state.startTime == '' || this.state.endTime == ''){
+    Alert.alert(
+      'Error',
+      'Please select a time slot to create activity',
+      [
+        {text: 'ok'}
+      ],
+      { cancelable: true }
+    )
+  }
+  else if(this.state.activityDate == '' ){
+    Alert.alert(
+      'Error',
+      'Please select a date  to create activity',
+      [
+        {text: 'ok'}
+      ],
+      { cancelable: true }
+    )
+  }
+  else if(this.state.activityType == '' ){
+    Alert.alert(
+      'Error',
+      'Please select activity type  to create activity',
+      [
+        {text: 'ok'}
+      ],
+      { cancelable: true }
+    )
+  }
+  else if(this.state.skillType == '' ){
+    Alert.alert(
+      'Error',
+      'Please select a skill type  to create activity',
+      [
+        {text: 'ok'}
+      ],
+      { cancelable: true }
+    )
+  }
+  else {
+    let notify = 0
+    if(!this.state.notifyFriends){
+      notify = 1
+    }
+    this.setState({spinnerVisibility: true, loadingMessage: 'Creating activity, Please wait...'})
+    formData.append('userId', GLOBAL.user_id);
+    formData.append('sportId', GLOBAL.sport );
+    formData.append('venueId', this.state.venueId);
+    formData.append('activityDate', this.state.activityDate);
+    formData.append('startTime', this.state.startTime);
+    formData.append('endTime', this.state.endTime);
+    formData.append('activityType', this.state.activityType);
+    formData.append('skillType', this.state.skillType);
+    formData.append('timeslot', this.state.timeslot);
+    formData.append('notifyFriends', notify);
+    formData.append('locality', this.state.locality);
+    let data = {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            "Content-Type": "multipart/form-data",
+        },
+        body: formData
+    }
+    fetch("http://testingmadesimple.org/playard/api/service/createActivity", data)
+    .then(response => response.json())
+    .then(responseJson =>
+     {
+       console.log("####",responseJson);
+       console.log("@@@@!!",formData);
+            this.setState({spinnerVisibility: false})
+            if(responseJson.status == ("1"))
+               {
+                 GLOBAL.sport=''
+                 Alert.alert(
+                   'Success',
+                   'Successfully Created the activity',
+                   [
+                     {text: 'okay', onPress: () =>  {this.props.navigation.navigate('Profile')}},
+                   ],
+                   { cancelable: true }
+                 )
+                }
+                else{
+                  GLOBAL.sport = ''
+                Alert.alert(
+                  'Error',
+                  'Failed to create activity, Please try again...',
+                  [
+                    {text: 'ok'}
+                  ],
+                  { cancelable: true }
+                )
+              }
+      }
+
+    )
+
+    .catch(error => this.setState({spinnerVisibility: false}));
+  }
+
+
+
+}
  render()
  {
+   console.log("#$$$$$$$$",GLOBAL.sport);
    return(
     < SafeAreaView style={{flex:1}}>
                   <View style={styles.cartHeader}>
@@ -163,13 +315,14 @@ static navigationOptions = {
                                 </View>
                         </View>
                         <View style={styles.signInBtn}>
-                              <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
+                              <TouchableOpacity onPress={() => this.createActivity()}>
                                     <Text style={styles.signInBtnText}>Create Activity</Text>
                               </TouchableOpacity>
                         </View>
 
 
                   </View>
+                {this.spinnerComponent()}
             </ScrollView>
 
     </SafeAreaView>

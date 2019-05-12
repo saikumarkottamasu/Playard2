@@ -11,7 +11,7 @@ export default class Profile extends Component {
     return (
       <View style={styles.container}>
               <View style={styles.cartHeader}>
-                    
+
                     <View style={styles.profileView}>
                           <Text style={styles.profileText}>Rasoolpura</Text>
                           <View style={[styles.iconContainer,{marginLeft:5}]}>
@@ -20,52 +20,52 @@ export default class Profile extends Component {
                                 source={require('.././images/location-checked.png')} />
                           </View>
                     </View>
-                    
+
                     <View style={{marginLeft:'auto',flexDirection:"row",marginRight:15}}>
                         <View style={styles.iconContainer}>
-                              <TouchableOpacity onPress={() => this.props.navigation.navigate('create_Activity')}>                  
+                              <TouchableOpacity onPress={() =>{GLOBAL.sport= ''; this.props.navigation.navigate('create_Activity')}}>                  
                                    <Image
                                   style={styles.locationImg}
                                   source={require('.././images/create-activity.png')} />
                               </TouchableOpacity>
                         </View>
                         <View style={styles.iconContainer}>
-                              <TouchableOpacity onPress={() => this.props.navigation.navigate('')}>                  
+                              <TouchableOpacity onPress={() => this.props.navigation.navigate('')}>
                                    <Image
                                   style={styles.locationImg}
                                   source={require('.././images/chat-icon.png')} />
                               </TouchableOpacity>
                         </View>
                         <View style={styles.iconContainer}>
-                              <TouchableOpacity onPress={() => this.props.navigation.navigate('')}>                  
+                              <TouchableOpacity onPress={() => this.props.navigation.navigate('')}>
                                    <Image
                                   style={styles.locationImg}
                                   source={require('.././images/notification-icon.png')} />
                               </TouchableOpacity>
                         </View>
-                    </View>                       
+                    </View>
               </View>
-              <View style={{flexDirection:"row",backgroundColor:"#6ad5f3"}}>                  
-                    <View style={styles.headerWrapper}>  
+              <View style={{flexDirection:"row",backgroundColor:"#6ad5f3"}}>
+                    <View style={styles.headerWrapper}>
                         <Text style={styles.headerText}>My Activities</Text>
-                        
+
                     </View>
                     <View style={[styles.headerWrapper,{ borderBottomWidth: 0}]}>
-                        <TouchableHighlight onPress={() => this.props.navigation.navigate('')}>  
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('')}>
                             <View style={{flexDirection:"row"}}>
                               <Text style={[styles.headerText,{ color:"#daf3fb"}]}>My Sports</Text>
-                              
+
                            </View>
                         </TouchableHighlight>
                     </View>
                     <View style={[styles.headerWrapper,{ borderBottomWidth: 0}]}>
-                        <TouchableHighlight onPress={() => this.props.navigation.navigate('')}>  
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('')}>
                             <View style={{flexDirection:"row"}}>
                               <Text style={[styles.headerText,{ color:"#daf3fb"}]}>Other Sports</Text>
-                              
+
                            </View>
                         </TouchableHighlight>
-                    </View>                                                               
+                    </View>
               </View>
               <View style={styles.upcomingWrapper}>
                   <Text style={styles.upcomingText}>Upcoming Activities</Text>
@@ -75,7 +75,7 @@ export default class Profile extends Component {
                             </TouchableOpacity>
                   </View>
               </View>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('activity_view')}>  
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('activity_view')}>
 
               <View style={styles.listBody}>
                     <View style={{flexDirection:"row",marginBottom:10}}>
@@ -106,7 +106,7 @@ export default class Profile extends Component {
                               <Image
                                       style={styles.profileImg}
                                       source={require('.././images/user-icon.png')}
-                              /> 
+                              />
                               <View style={styles.titleContent}>
                                     <Text style={styles.titleText}>Neeraja</Text>
                                     <Text style={styles.underlineText}>Intermediate</Text>
@@ -116,7 +116,7 @@ export default class Profile extends Component {
                                   <View style={{marginLeft:'auto'}}>
                                              <Image
                                             style={styles.goingImg}
-                                            source={require('.././images/going-icon.png')} />                                                                                                               
+                                            source={require('.././images/going-icon.png')} />
                                   </View>
                                   <Text style={styles.goingText}>20 going</Text>
 
@@ -153,7 +153,7 @@ export default class Profile extends Component {
                               <Image
                                       style={styles.profileImg}
                                       source={require('.././images/user-icon.png')}
-                              /> 
+                              />
                               <View style={styles.titleContent}>
                                     <Text style={styles.titleText}>Parvathi</Text>
                                     <Text style={styles.underlineText}>Beginner</Text>
@@ -162,7 +162,7 @@ export default class Profile extends Component {
                                   <View style={{marginLeft:'auto',marginTop:10}}>
                                              <Image
                                             style={styles.goingImg}
-                                            source={require('.././images/lock-icon.png')} />                                                                                                               
+                                            source={require('.././images/lock-icon.png')} />
                                   </View>
 
                               </View>
@@ -197,7 +197,7 @@ export default class Profile extends Component {
                               <Image
                                       style={styles.profileImg}
                                       source={require('.././images/user-icon.png')}
-                              /> 
+                              />
                               <View style={styles.titleContent}>
                                     <Text style={styles.titleText}>Neeraja</Text>
                                     <Text style={styles.underlineText}>Intermediate</Text>
@@ -205,20 +205,20 @@ export default class Profile extends Component {
                               </View>
                               <View style={styles.goingContent}>
                                   <View style={{marginLeft:'auto'}}>
-                                  <TouchableHighlight onPress={() => this.props.navigation.navigate('select_Sports')}>                                                         
+                                  <TouchableHighlight onPress={() => this.props.navigation.navigate('select_Sports')}>
                                              <Image
                                             style={styles.goingImg}
-                                            source={require('.././images/going-icon.png')} />                                                                                                               
-                                     </TouchableHighlight> 
+                                            source={require('.././images/going-icon.png')} />
+                                     </TouchableHighlight>
                                   </View>
 
                                   <Text style={styles.goingText}>20 going</Text>
                               </View>
                     </View>
             </View>
-               
+
       </View>
-    
+
     );
   }
 }
@@ -265,11 +265,11 @@ profileImg:{
   {
     width:60,
     height:60,
-    borderRadius:50,  
+    borderRadius:50,
   },
  profileView:
   {
-    flexDirection:"row",  
+    flexDirection:"row",
   },
   profileText:
   {
@@ -290,7 +290,7 @@ profileImg:{
     flexDirection:"row",
     justifyContent: 'center',
     alignItems: 'center',
-    flex:1, 
+    flex:1,
     borderColor: '#b9edfc',
     borderBottomWidth: 3,
     paddingBottom:3
@@ -306,7 +306,7 @@ headerText:
     fontSize: 16,
     marginLeft:5,
     fontFamily:"TwCenMTStd",
-    color:"white",    
+    color:"white",
   },
   upcomingWrapper:
   {
@@ -321,7 +321,7 @@ headerText:
     marginLeft:10
   },
   signInBtn:
-  {   
+  {
     backgroundColor:"#5c9ef1",
     borderRadius:10,
     width:65,
@@ -411,5 +411,3 @@ headerText:
   },
 
 });
-
-

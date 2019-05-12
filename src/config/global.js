@@ -1,3 +1,5 @@
 module.exports = {
-    sports_list: []
+    sport: '',
+    sports_list: [],
+    user_id: ''
   }

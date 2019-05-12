@@ -7,7 +7,7 @@ import { Separator } from 'native-base';
 import {Collapse,CollapseHeader,CollapseBody, AccordionList} from
 'accordion-collapse-react-native';
 import GridLayout from 'react-native-layout-grid';
-
+var GLOBAL = require('.././config/global.js');
 
 
 
@@ -62,13 +62,33 @@ static navigationOptions = {
        header: null
     };
 
-
-     markSelectedSport(item){
-      // console.log("@@!!!!!!markSelectedSport", this);
-      for(sports of this.state.sportsList){
-        // console.log("@@@",sports);
-      }
+    setgame(item){
+      console.log("#@@@###",this);
     }
+    markSelectedSport(item){
+      console.log("@@!!!!!!markSelectedSport", this);
+      temp = GLOBAL.sports_list
+
+     for(sports of temp){
+       console.log("@@@",sports);
+       for(sport of sports['sports']){
+         if(sport.sportName == item.sportName){
+           sport.isSelected=true
+         }
+         console.log("###sport",sport);
+       }
+     }
+      GLOBAL.sports_list = temp
+      Alert.alert(
+        'Confirmation',
+        'Are you sure wants to select the game?',
+        [
+          {text: 'Yes', onPress: () =>  {GLOBAL.sport=item.sportId}},
+          {text: 'No'}
+        ],
+        { cancelable: true }
+      )
+   }
 
     _head(item){
       // console.log("####",item);
@@ -172,6 +192,7 @@ onToggle(index){
       }
     sportsList[index]['isListViewed']=true
     this.setState({sportsList: sportsList})
+    GLOBAL.sports_list=sportsList
   }
   }
 
@@ -200,6 +221,7 @@ componentWillMount(){
             }
           }
             this.setState({sportsList:responseJson['sports'], spinnerVisibility: false})
+            GLOBAL.sports_list=responseJson['sports']
         }
         else{
           this.setState({spinnerVisibility: false})
@@ -241,6 +263,7 @@ spinnerComponent() {
 
  render()
  {
+   console.log("$$$$$$$$$$$$$$");
    if(!this.state.spinnerVisibility)
    {
    return(
