@@ -1,13 +1,42 @@
 import React from 'react';
 import { StyleSheet, Text,TextInput,TouchableOpacity,SafeAreaView
-,ScrollView,TouchableHighlight,Image,View, ActivityIndicator, Alert }
+,ScrollView,TouchableHighlight,Image,View, ActivityIndicator, Alert, FlatList }
 from 'react-native';
 import Icon from 'react-native-ionicons';
 import { Separator } from 'native-base';
 import {Collapse,CollapseHeader,CollapseBody, AccordionList} from
 'accordion-collapse-react-native';
+import GridLayout from 'react-native-layout-grid';
 
 
+
+
+function renderGridItem(item){
+  // console.log("##########@@@!@@DOne",item);
+if(item){
+  let user = new select_Sports();
+// user.markSelectedSport();
+  return (
+                          <TouchableOpacity onPress={() =>user.markSelectedSport(item)} style={styles.accBody}>
+                                <View style={styles.inlineWrapper}>
+
+                                      <View style={styles.itemWrapper}>
+                                          <Image
+                                            style={styles.sportIconImg}
+                                            source={require('.././images/cricket.png')} />
+                                            <Text style={styles.bodyText}>{item.sportName}</Text>
+                                      </View>
+
+
+                                </View>
+
+                          </TouchableOpacity>
+
+
+
+  );
+}
+}
 export default class select_Sports extends React.Component {
   constructor(props) {
   super(props);
@@ -33,76 +62,121 @@ static navigationOptions = {
        header: null
     };
 
+
+     markSelectedSport(item){
+      // console.log("@@!!!!!!markSelectedSport", this);
+      for(sports of this.state.sportsList){
+        // console.log("@@@",sports);
+      }
+    }
+
     _head(item){
-        return(
-                          
-                          <View style={styles.accHeader}>
-                              <View style={{flexDirection:"row",alignItems:"center"}}>
-                                <Text style={styles.accHeaderText}>Team Sports</Text>
-                                <Image
-                                    style={styles.checkedGreenImg}
-                                    source={require('.././images/checked-icon.png')} />  
-                              </View>
-                              <View style={styles.iconContainer}>
-                                <Image
-                                    style={styles.dropdownImg}
-                                    source={require('.././images/black-downarrow.png')} />  
-                              </View>
-                            </View>
+      // console.log("####",item);
+      return(
+        <View style={styles.accHeader}>
+            <View style={{flexDirection:"row",alignItems:"center"}}>
+              <Text style={styles.accHeaderText}>{item.categoryName}</Text>
+              {item.isListViewed?
+              <Image
+                  style={styles.checkedGreenImg}
+                  source={require('.././images/checked-icon.png')} />
+                  :
+                  null
+                }
+            </View>
+            <View style={styles.iconContainer}>
+              <Image
+                  style={styles.dropdownImg}
+                  source={require('.././images/black-downarrow.png')} />
+            </View>
+          </View>
+      )
 
-
-        );
     }
 
     _body(item){
-        return (
-                               
-                                <View style={styles.accBody}>
-                                      <View style={styles.inlineWrapper}>
-                                           
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/cricket.png')} /> 
-                                                  <Text style={styles.bodyText}>Cricket</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/table-tennis.png')} /> 
-                                                <Text style={styles.bodyText}>Table Tennis</Text>
-                                                <View style={styles.blueIcon}>
-                                                </View>
-                                            </View>
+      // console.log("itemitem%%%",item['sports']);
+      // console.log(("&&&&&&",typeof(renderGridItem)));
+      console.log("#####body",item);
+      return(
+        <View style={{flex: 1}}>
+          <FlatList
+          data={item['sports']}
+          renderItem={({item}) => renderGridItem(item)}
+          extraData={this.state}
+        />
+        </View>
 
-                                      </View>
-                                      <View style={styles.inlineWrapper}>
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/foot-ball.png')} /> 
-                                                  <Text style={styles.bodyText}>Football</Text>
-                                            </View>
-                                           
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/basket-ball.png')} /> 
-                                                  <Text style={styles.bodyText}>Basket Ball</Text>
-                                            </View>
-                                           
-                                            
-                                      </View>
-                                </View>
+      );
+      // <GridLayout
+      //   items= {item['sports']}
+      //   itemsPerRow={2}
+      //   renderItem={renderGridItem(item)}
+      // />
+      // return (
+      //
+      //                         <View style={styles.accBody}>
+      //                               <View style={styles.inlineWrapper}>
+      //
+      //                                     <View style={styles.itemWrapper}>
+      //                                         <Image
+      //                                           style={styles.sportIconImg}
+      //                                           source={require('.././images/cricket.png')} />
+      //                                           <Text style={styles.bodyText}>Cricket</Text>
+      //                                     </View>
+      //                                     <View style={styles.itemWrapper}>
+      //                                         <Image
+      //                                           style={styles.sportIconImg}
+      //                                           source={require('.././images/table-tennis.png')} />
+      //                                         <Text style={styles.bodyText}>Table Tennis</Text>
+      //                                         <View style={styles.blueIcon}>
+      //                                         </View>
+      //                                     </View>
+      //
+      //                               </View>
+      //                               <View style={styles.inlineWrapper}>
+      //                                     <View style={styles.itemWrapper2}>
+      //                                         <Image
+      //                                           style={styles.sportIconImg}
+      //                                           source={require('.././images/foot-ball.png')} />
+      //                                           <Text style={styles.bodyText}>Football</Text>
+      //                                     </View>
+      //
+      //                                     <View style={styles.itemWrapper2}>
+      //                                         <Image
+      //                                           style={styles.sportIconImg}
+      //                                           source={require('.././images/basket-ball.png')} />
+      //                                           <Text style={styles.bodyText}>Basket Ball</Text>
+      //                                     </View>
+      //
+      //
+      //                               </View>
+      //                         </View>
+      //
+      //
+      //
+      // );
 
 
-
-        );
     }
 
-dummy(index){
-  console.log("@@@",index);
+onToggle(index){
+
+  if(index!=null){
+
+    let sportsList = this.state.sportsList
+
+    if(!sportsList[index]['isListViewed']){
+      for (sports of sportsList){
+        sports['isListViewed']= false
+      }
+    sportsList[index]['isListViewed']=true
+    this.setState({sportsList: sportsList})
+  }
+  }
+
 }
+
 componentWillMount(){
   this.setState({spinnerVisibility: true, loadingMessage: 'Getting sports list, Please wait...'})
   let data = {
@@ -116,14 +190,21 @@ componentWillMount(){
   .then(response => response.json())
   .then(responseJson =>
    {
-      this.setState({spinnerVisibility: false})
+
         if(responseJson['status']== 1){
-            this.setState({sportsList:responseJson['sports']})
+          for( sports of responseJson['sports']){
+            sports['isListViewed']=false
+            sports['isAnySportSelected']=false
+            for (individualSport of sports['sports']){
+              individualSport['isSelected'] = false
+            }
+          }
+            this.setState({sportsList:responseJson['sports'], spinnerVisibility: false})
         }
         else{
+          this.setState({spinnerVisibility: false})
           this.displayError()
         }
-             console.log('response:', responseJson)
     }
 
   )
@@ -160,6 +241,8 @@ spinnerComponent() {
 
  render()
  {
+   if(!this.state.spinnerVisibility)
+   {
    return(
     <SafeAreaView style={{flex:1}}>
               <View style={styles.cartHeader}>
@@ -189,11 +272,14 @@ spinnerComponent() {
                           </View>
                   </View>
 
-                      <AccordionList
-                             list={this.state.list}
+
+                  <AccordionList
+                             list={this.state.sportsList}
                              header={this._head}
                              body={this._body}
-                               onToggle={(index) => { this.dummy(index)}}
+                             // body={(item) => { this._body(item)}}
+
+                               onToggle={(index) => { this.onToggle(index)}}
                            />
 
 
@@ -203,6 +289,20 @@ spinnerComponent() {
 
    );
  }
+ else{
+  return(
+<SafeAreaView style={{flex: 1}}>
+    <ScrollView>
+    <View style={styles.cartHeader}>
+      {this.spinnerComponent()}
+    </View>
+    </ScrollView>
+</SafeAreaView>
+
+  )
+}
+ }
+
 }
 const styles = StyleSheet.create({
   cartHeader:
@@ -258,7 +358,7 @@ accordionContainer:
     marginTop:20,
     padding:10,
     borderColor:'#d7d7d7',
-    borderWidth: 1,
+    borderWidth: 0,
     borderRadius:5
   },
 accHeader:
@@ -267,7 +367,7 @@ accHeader:
     borderColor:'#d7d7d7',
     borderTopWidth: 1,
     borderRadius:5,
-    
+
     marginTop:10,
     borderBottomWidth: 1,
    marginBottom:10,
@@ -358,4 +458,3 @@ checkedGreenImg:
   },
 
 });
-

@@ -6,7 +6,7 @@ import Icon from 'react-native-ionicons';
 export default class select_Time extends React.Component {
 static navigationOptions = {
        header: null,
-    }; 
+    };
 
 async timePicker(){
         const TimePickerModule = require('NativeModules').TimePickerAndroid;
@@ -16,6 +16,8 @@ async timePicker(){
                 minute: 0,
                 is24Hour: false, // Will display '2 PM'
             });
+            console.log("##@@@action",action);
+            console.log("@!!!",TimePickerAndroid.dismissedAction);
             if (action !== TimePickerAndroid.dismissedAction) {
                 // Selected hour (0-23), minute (0-59)
                 //Applying extra 0 before the hour/minute for better visibility
@@ -23,69 +25,74 @@ async timePicker(){
                 var m=(minute<10)?"0"+minute:minute;
                 var h=(hour<10)?"0"+hour:hour;
                 this.setState({ time:h+":"+m})
+                console.log("###",this.state.time);
             }
         } catch ({code, message}) {}
     }
 
- render() 
+setTimeSlot(seleted_time_slot, start_time, end_time){
+ this.props.navigation.state.params.createActivity.setState({timeslot:seleted_time_slot, startTime: start_time, endTime: end_time},()=>{this.props.navigation.navigate('create_Activity')})
+}
+ render()
  {
+   console.log("@@@@",this.props.navigation.state.params.createActivity.state);
    return(
     <SafeAreaView >
             <View style={styles.cartHeader}>
-                      <TouchableOpacity onPress={() => this.props.navigation.navigate('create_Activity')}>                  
+                      <TouchableOpacity onPress={() => this.props.navigation.navigate('create_Activity')}>
                           <Image
                               style={styles.searchImg}
                               source={require('.././images/back-arrow-white.png')} />
                       </TouchableOpacity>
-                      <Text style={styles.profileText}>Select Time Slot</Text>                                     
+                      <Text style={styles.profileText}>Select Time Slot</Text>
               </View>
               <View style={styles.contentBody}>
                     <Text style={styles.addressText}>Select a suitable time</Text>
-                    <View style={styles.sessionWrapper}>
+                    <TouchableOpacity onPress={this.setTimeSlot.bind(this,'Morning','12am', '9am')}style={styles.sessionWrapper}>
                             <Image
                                   style={styles.sessionIcon}
                                   source={require('.././images/morning-icon.png')} />
                            <Text style={styles.sessionText}>Morning(12am to 9am)</Text>
-                    </View>
-                    <View style={styles.sessionWrapper}>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.setTimeSlot.bind(this,'Day','9am', '4pm')}style={styles.sessionWrapper}>
                             <Image
                                   style={styles.sessionIcon}
                                   source={require('.././images/day.png')} />
-                           <Text style={styles.sessionText}>Day( 9am to 4pm)</Text>
-                    </View>
-                    <View style={styles.sessionWrapper}>
+                           <Text style={styles.sessionText}>Day(9am to 4pm)</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.setTimeSlot.bind(this,'Evening', '4pm', '9pm')} style={styles.sessionWrapper}>
                             <Image
                                   style={styles.sessionIcon}
                                   source={require('.././images/evening.png')} />
-                           <Text style={styles.sessionText}>Evening( 4pm to 9pm)</Text>
-                    </View>
-                    <View style={styles.sessionWrapper}>
+                           <Text style={styles.sessionText}>Evening(4pm to 9pm)</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.setTimeSlot.bind(this,'Night', '9pm', '12am')} style={styles.sessionWrapper}>
                             <Image
                                   style={styles.sessionIcon}
                                   source={require('.././images/night-icon.png')} />
-                           <Text style={styles.sessionText}>Night( 9pm to 12am)</Text>
-                    </View>
+                           <Text style={styles.sessionText}>Night(9pm to 12am)</Text>
+                    </TouchableOpacity>
                     <Text style={[styles.addressText,{ marginTop:20}]}>Or, you can also select a specific time</Text>
-                    <View style={styles.clockWrapper}>                         
-                         <View style={styles.clockContent}> 
-                                <TouchableOpacity  onPress={this.timePicker} >                   
+                    <View style={styles.clockWrapper}>
+                         <View style={styles.clockContent}>
+                                <View  onPress={this.timePicker} >
                                      <Text style={styles.startText}>Start Time</Text>
                                      <Text style={styles.clockTimeText}>12.00PM</Text>
-                                </TouchableOpacity>
+                                </View>
                           </View>
                           <View style={{width:"5%"}}>
                           </View>
                          <View style={styles.clockContent}>
-                              <TouchableOpacity  onPress={this.timePicker} >                      
+                              <View  onPress={this.timePicker} >
                                <Text style={styles.startText}>End Time</Text>
                                <Text style={styles.clockTimeText}>03.00PM</Text>
-                               </TouchableOpacity>
+                               </View>
                         </View>
                     </View>
               </View>
-                  
+
     </SafeAreaView >
-     
+
    );
  }
 }
@@ -164,8 +171,10 @@ const styles = StyleSheet.create({
     padding:10,
     width:"47%",
     borderRadius:5,
-   
-    
+    marginLeft:10,
+    marginRight:10
+    // backgroundColor:"pink"
+
   },
   clockTimeText:
   {
@@ -179,7 +188,7 @@ const styles = StyleSheet.create({
     fontSize:15,
     color:"#363f4d",
     fontFamily:"TwCenMTStd",
-    
+
   },
   searchImg:
   {
@@ -189,5 +198,3 @@ const styles = StyleSheet.create({
   }
 
 });
-
-

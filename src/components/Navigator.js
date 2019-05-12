@@ -23,13 +23,13 @@ import Splashscreen from './Splashscreen';
 
  const Navigator = createStackNavigator
 (	{
-		
+
 		signUp: { screen: signUp },
 		signIn:{screen: signIn},
 		Otp: {screen: Otp},
 		forgotPassword: {screen: forgotPassword},
-		Profile: { screen: Profile },	
-		Otp_reset: { screen: Otp_reset },	
+		Profile: { screen: Profile },
+		Otp_reset: { screen: Otp_reset },
 		resetPassword: {screen: resetPassword},
 		Preffered_sports: {screen: Preffered_sports},
 		create_Activity: {screen: create_Activity},
@@ -42,13 +42,12 @@ import Splashscreen from './Splashscreen';
 		join_activity: {screen: join_activity},
 		see_all: {screen: see_all},
 
-		Splashscreen: { screen: Splashscreen },	
+		Splashscreen: { screen: Splashscreen },
 	},
 	{
-    	initialRouteName: 'select_Sports',
+    	initialRouteName: 'create_Activity',
   	}
 
 );
 
 export default  createAppContainer(Navigator);
-

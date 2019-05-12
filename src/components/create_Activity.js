@@ -5,30 +5,32 @@ export default class create_Activity extends React.Component {
 static navigationOptions = {
        header: null,
     };
-  constructor(props) 
+  constructor(props)
   {
     super(props);
-    this.state = 
-            {            
+    this.state =
+            {
               selected: "key1",
               selected2: "s1",
-              switchOn1: false,
+              sportId: '',
+              venueId: '',
+              locality: '',
+              activityDate: '',
+              startTime: '',
+              endTime: '',
+              activityType: '',
+              skillType: '',
+              timeslot: '',
+              notifyFriends: false,
+
             };
 
   }
 
-onValueChange(value: string) {
-    this.setState({
-      selected: value
-    });
-  }
-  onValueChange(value: string) {
-    this.setState({
-      selected2: value
-    });
-  }
-  onPress1 = () => {
-    this.setState({ switchOn1: !this.state.switchOn1 });
+
+  toggleNotifyFriends(){
+    console.log("@@@@@@",!this.state.notifyFriends);
+    this.setState({ notifyFriends: !this.state.notifyFriends });
   }
     change(value) {
     this.setState(() => {
@@ -38,111 +40,126 @@ onValueChange(value: string) {
     });
   }
 
- render() 
+ render()
  {
    return(
     < SafeAreaView style={{flex:1}}>
                   <View style={styles.cartHeader}>
-                      <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>                  
+                      <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
                            <Image
                           style={styles.searchImg}
                           source={require('.././images/back-arrow-white.png')} />
                       </TouchableOpacity>
-                      <Text style={styles.profileText}>Create Activity</Text>                                     
+                      <Text style={styles.profileText}>Create Activity</Text>
                   </View>
           <ScrollView>
+
                   <View style={styles.contentBody}>
+                  <TouchableOpacity onPress={() => this.props.navigation.navigate('select_Sports')}>
                       <View style={styles.itemWrapper}>
                              <Text style={styles.selectSport}>Select Sport</Text>
                             <View style={styles.textWrapper}>
                                 <Text style={styles.accHeaderText}>Eg: Cricket / Boxing</Text>
                                 <View style={{marginLeft:"auto"}}>
-                                      <TouchableHighlight onPress={() => this.props.navigation.navigate('select_Sports')}>                                                         
                                              <Image
                                             style={styles.rightImg}
-                                            source={require('.././images/black-rightarrow.png')} /> 
-                                     </TouchableHighlight>  
+                                            source={require('.././images/black-rightarrow.png')} />
+
                                 </View>
                             </View>
                       </View>
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={() => this.props.navigation.navigate('select_Location',{createActivity: this})}>
                       <View style={styles.itemWrapper}>
                              <Text style={styles.selectSport}>Area/ Location</Text>
                             <View style={styles.textWrapper}>
                                 <Text style={styles.accHeaderText}>Locality or venue name</Text>
                                 <View style={{marginLeft:"auto"}}>
-                                      <TouchableHighlight onPress={() => this.props.navigation.navigate('select_Location')}>                                                         
+
                                              <Image
                                             style={styles.rightImg}
-                                            source={require('.././images/black-rightarrow.png')} />                                                                                                               
-                                     </TouchableHighlight>  
+                                            source={require('.././images/black-rightarrow.png')} />
                                 </View>
                             </View>
                       </View>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity onPress={() => this.props.navigation.navigate('select_Date',{createActivity: this})}>
                       <View style={styles.itemWrapper}>
                              <Text style={styles.selectSport}>Date</Text>
                             <View style={styles.textWrapper}>
                                 <Text style={styles.accHeaderText}>Select Date</Text>
                                 <View style={{marginLeft:"auto"}}>
-                                      <TouchableHighlight onPress={() => this.props.navigation.navigate('select_Date')}>                                                         
+
                                              <Image
                                             style={styles.rightImg}
-                                            source={require('.././images/black-rightarrow.png')} />                                                                                                               
-                                     </TouchableHighlight>  
+                                            source={require('.././images/black-rightarrow.png')} />
+
                                 </View>
                             </View>
                       </View>
+                           </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('select_Time',{createActivity: this})}>
                       <View style={styles.itemWrapper}>
                              <Text style={styles.selectSport}>Time</Text>
                             <View style={styles.textWrapper}>
                                 <Text style={styles.accHeaderText}>Select flexible time slot</Text>
                                 <View style={{marginLeft:"auto"}}>
-                                      <TouchableHighlight onPress={() => this.props.navigation.navigate('select_Time')}>
                                             <View style={{}}>
                                              <Image
                                             style={styles.rightImg}
                                             source={require('.././images/black-rightarrow.png')} />
-                                            </View>                                                                                                               
-                                     </TouchableHighlight>  
+                                            </View>
                                 </View>
                             </View>
                       </View>
+                     </TouchableOpacity>
                       <Text style={styles.selectSport}>Activity Type</Text>
-                        <View style={styles.mobileText1}>                        
+                        <View style={styles.mobileText1}>
                                   <Picker
-                                    selectedValue={this.state.selected}                                  
-                                    onValueChange={(itemValue, itemIndex) =>
-                                      this.setState({selected: itemValue})
+                                    selectedValue={this.state.activityType}
+                                    onValueChange={(itemValue, itemIndex) =>{
+                                      console.log("####",itemValue);
+                                      if(itemValue != ""){
+                                      this.setState({activityType: itemValue})}
+                                    }
                                     }>
 
-                                    <Picker.Item label="Select Activity Type" value="key1" itemStyle={{fontStyle:"TwCenMTStd"}}/>
-                                    <Picker.Item label="Public" value="key2" />
-                                    <Picker.Item label="Friends" value="key3" />
+                                    <Picker.Item label="Select Activity Type" value="" itemStyle={{fontStyle:"TwCenMTStd"}}/>
+                                    <Picker.Item label="Public" value="Public" />
+                                    <Picker.Item label="Friends" value="Friends" />
                                   </Picker>
                         </View>
-                        <Text style={styles.selectSport}>Skills Level</Text>                     
-                        <View style={styles.mobileText1}>                        
+                        <Text style={styles.selectSport}>Skills Level</Text>
+                        <View style={styles.mobileText1}>
                                   <Picker
-                                    selectedValue={this.state.selected}                                  
-                                    onValueChange={(itemValue, itemIndex) =>
-                                      this.setState({selected: itemValue})
+                                    selectedValue={this.state.skillType}
+                                    onValueChange={(itemValue, itemIndex) =>{
+                                      console.log("itemValue!!",itemValue);
+                                      if(itemValue != ""){
+                                        console.log("@@@notnone###");
+                                      this.setState({skillType: itemValue})
+                                    }
+                                    }
                                     }>
 
-                                    <Picker.Item label="Select Skills Level" value="s1" itemStyle={{fontStyle:"TwCenMTStd"}}/>
-                                    <Picker.Item label="Beginner" value="s2" />
-                                    <Picker.Item label="Amateur" value="s3" />
-                                    <Picker.Item label="Intermediate" value="s4" />
-                                    <Picker.Item label="Advanced" value="s5" />
-                                    <Picker.Item label="Professional" value="s6" />
+                                    <Picker.Item label="Select Skills Level" value="" itemStyle={{fontStyle:"TwCenMTStd"}}/>
+                                    <Picker.Item label="Beginner" value="Beginner" />
+                                    <Picker.Item label="Amateur" value="Amateur" />
+                                    <Picker.Item label="Intermediate" value="Intermediate" />
+                                    <Picker.Item label="Advanced" value="Advanced" />
+                                    <Picker.Item label="Professional" value="Professional" />
                                   </Picker>
                         </View>
                         <View style={{flexDirection:"row"}}>
                                 <Text style={styles.accHeaderText}>Notify friends</Text>
                                 <View style={{marginLeft:"auto",}}>
                                     <Switch
-                                         onValueChange = {this.onPress1}
+                                         onValueChange = {this.toggleNotifyFriends.bind(this)}
+
                                           trackColor={{true: '#3DBEF5', false: '#D3D3D3'}}
-                                          thumbColor="#3DBEF5"
-                                         value = {this.state.switchOn1}/>
+                                          thumbColor="white"
+                                         value = {this.state.notifyFriends}/>
                                 </View>
                         </View>
                         <View style={styles.signInBtn}>
@@ -153,10 +170,10 @@ onValueChange(value: string) {
 
 
                   </View>
-            </ScrollView>  
+            </ScrollView>
 
     </SafeAreaView>
-     
+
    );
  }
 }
@@ -176,9 +193,9 @@ const styles = StyleSheet.create({
   {
     width:15,
     height:15,
-    // padding:10,   
+    // padding:10,
     // alignSelf: 'flex-start',
-    // flex:1, 
+    // flex:1,
     // backgroundColor:"pink"
   },
 
@@ -212,7 +229,7 @@ const styles = StyleSheet.create({
     borderBottomWidth:1,
     borderColor:"#dadada",
     paddingBottom:5,
-    
+
   },
   selectSport:
   {
@@ -223,7 +240,7 @@ const styles = StyleSheet.create({
   },
   contentBody:
   {
-    padding:20
+    padding:20,
   },
   itemWrapper:
   {
@@ -238,7 +255,7 @@ const styles = StyleSheet.create({
     // backgroundColor:"pink"
   },
   signInBtn:
-  {   
+  {
     backgroundColor:"#3DBEF5",
     borderRadius:5,
     marginTop:40,
@@ -255,5 +272,3 @@ const styles = StyleSheet.create({
   },
 
 });
-
-

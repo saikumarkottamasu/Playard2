@@ -6,40 +6,54 @@ import {Calendar} from 'react-native-calendars';
 export default class select_Date extends React.Component {
 static navigationOptions = {
        header: null,
-    }; 
+    };
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {dateList:{}};
     this.onDayPress = this.onDayPress.bind(this);
   }
   onDayPress(day) {
+    console.log("@@@@",day);
+    let newDateList = {}
+    this.props.navigation.state.params.createActivity.setState({activityDate:day['dateString']})
+  newDateList[day['dateString']]={selected: true, selectedColor: '#00CF87'}
     this.setState({
-      selected: day.dateString
+      selected: day.dateString, dateList: newDateList
     });
-  }    
- render() 
+  }
+  componentWillMount(){
+    console.log("!!!!!",this.props.navigation.state.params.createActivity.state.activityDate);
+    if(this.props.navigation.state.params.createActivity.state.activityDate){
+      let newDateList = {}
+    newDateList[this.props.navigation.state.params.createActivity.state.activityDate]={selected: true, selectedColor: '#00CF87'}
+      this.setState({
+        dateList: newDateList
+      });
+    }
+  }
+ render()
  {
    return(
     <SafeAreaView  style={{flex:1}}>
               <View style={styles.cartHeader}>
-                      <TouchableOpacity onPress={() => this.props.navigation.navigate('create_Activity')}>                  
+                      <TouchableOpacity onPress={() => this.props.navigation.navigate('create_Activity')}>
                           <Image
                           style={styles.searchImg}
                           source={require('.././images/back-arrow-white.png')} />
                       </TouchableOpacity>
-                      <Text style={styles.profileText}>Select Date</Text>                                     
+                      <Text style={styles.profileText}>Select Date</Text>
               </View>
 
         <Calendar
           onDayPress={this.onDayPress}
           style={styles.calendar}
+           markedDates={ Object.assign({}, this.state.dateList) }
           hideExtraDays
-          markedDates={{[this.state.selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'green'}}}
         />
-                           
+
     </SafeAreaView >
-     
+
    );
  }
 }
@@ -74,5 +88,3 @@ calendar: {
 
   },
 });
-
-
