@@ -22,6 +22,7 @@
     "react-native-google-signin": "^1.2.2",
     "react-native-hr-component": "^2.0.2",
     "react-native-ionicons": "^4.5.5",
+    "react-native-layout-grid": "0.0.2",
     "react-native-otp-inputs": "^2.0.1",
     "react-native-page-swiper": "^0.3.0",
     "react-native-picker-select": "^6.1.0",

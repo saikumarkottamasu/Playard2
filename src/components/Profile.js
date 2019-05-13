@@ -30,14 +30,14 @@ export default class Profile extends Component {
                               </TouchableOpacity>
                         </View>
                         <View style={styles.iconContainer}>
-                              <TouchableOpacity onPress={() => this.props.navigation.navigate('')}>
+                              <TouchableOpacity onPress={() => this.props.navigation.navigate('Conversations')}>
                                    <Image
                                   style={styles.locationImg}
                                   source={require('.././images/chat-icon.png')} />
                               </TouchableOpacity>
                         </View>
                         <View style={styles.iconContainer}>
-                              <TouchableOpacity onPress={() => this.props.navigation.navigate('')}>
+                              <TouchableOpacity onPress={() => this.props.navigation.navigate('Notifications')}>
                                    <Image
                                   style={styles.locationImg}
                                   source={require('.././images/notification-icon.png')} />
@@ -51,7 +51,7 @@ export default class Profile extends Component {
 
                     </View>
                     <View style={[styles.headerWrapper,{ borderBottomWidth: 0}]}>
-                        <TouchableHighlight onPress={() => this.props.navigation.navigate('')}>
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('Venues')}>
                             <View style={{flexDirection:"row"}}>
                               <Text style={[styles.headerText,{ color:"#daf3fb"}]}>My Sports</Text>
 

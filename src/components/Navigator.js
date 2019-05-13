@@ -19,6 +19,15 @@ import send_query from './send_query';
 import join_activity from './join_activity';
 import see_all from './see_all';
 
+import Conversations from './Conversations';
+import Chat from './Chat';
+import Members from './Members';
+import venue_Details from './venue_Details';
+import see_Map from './see_Map';
+import Venues from './Venues';
+import search_Venue from './search_Venue';
+import Notifications from './Notifications';
+
 import Splashscreen from './Splashscreen';
 
  const Navigator = createStackNavigator
@@ -41,6 +50,14 @@ import Splashscreen from './Splashscreen';
 		send_query: {screen: send_query},
 		join_activity: {screen: join_activity},
 		see_all: {screen: see_all},
+		Conversations: {screen: Conversations},
+		Chat: {screen: Chat},
+		Members: {screen: Members},
+		venue_Details: {screen: venue_Details},
+		see_Map: {screen: see_Map},
+		Venues: {screen: Venues},
+		search_Venue: {screen: search_Venue},
+		Notifications: {screen: Notifications},
 
 		Splashscreen: { screen: Splashscreen },
 	},

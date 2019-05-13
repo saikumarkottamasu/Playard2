@@ -346,10 +346,6 @@ const styles = StyleSheet.create({
   {
     width:15,
     height:15,
-    // padding:10,
-    // alignSelf: 'flex-start',
-    // flex:1,
-    // backgroundColor:"pink"
   },
 
   profileText:
