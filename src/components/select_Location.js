@@ -125,7 +125,6 @@ else {
 }
  render()
  {
-   console.log("@@@",this.props.navigation.state.params.createActivity);
    return(
     <SafeAreaView >
               <View style={styles.cartHeader}>
