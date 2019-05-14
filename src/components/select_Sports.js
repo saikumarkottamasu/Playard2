@@ -19,20 +19,14 @@ if(item){
   return (
                           <TouchableOpacity onPress={() =>user.markSelectedSport(item)} style={styles.accBody}>
                                 <View style={styles.inlineWrapper}>
-
                                       <View style={styles.itemWrapper}>
                                           <Image
                                             style={styles.sportIconImg}
                                             source={require('.././images/cricket.png')} />
                                             <Text style={styles.bodyText}>{item.sportName}</Text>
                                       </View>
-
-
                                 </View>
-
                           </TouchableOpacity>
-
-
 
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text,SafeAreaView,TextInput,TouchableOpacity,ScrollView,TouchableHighlight,Image,View } from 'react-native';
+import { StyleSheet,Text,SafeAreaView,TextInput,FlatList,TouchableOpacity,ScrollView,TouchableHighlight,Image,View } from 'react-native';
 
 
 export default class Conversations extends React.Component {
@@ -17,57 +17,59 @@ static navigationOptions = {
                           source={require('.././images/back-arrow-white.png')} />
                       </TouchableOpacity>
                       <Text style={styles.profileText}>Conversations</Text>
-            </View> 
-            <View style={styles.contentBody}>
-                <TouchableOpacity onPress={() =>this.props.navigation.navigate('Chat')}>
+            </View>
+        <FlatList
+          data={dataDump}
+          showsVerticalScrollIndicator={false}
+          renderItem={({item,index}) => 
 
-            		<View style={styles.contentView}>
-		              		<View style={styles.profileContent}>
-		                              <Image
-		                                      style={styles.profileImg}
-		                                      source={require('.././images/user-icon.png')}
-		                              />
-		                              <View style={styles.titleContent}>
-		                                    <Text style={styles.titleText}>Your activity</Text>
+                  <View style={styles.contentBody}>
+                      <TouchableOpacity onPress={() =>this.props.navigation.navigate('Chat')}>
+                  		    <View style={styles.contentView}>
+      		              		<View style={styles.profileContent}>
+      		                              <Image
+      		                                      style={styles.profileImg}
+      		                                      source={require('.././images/user-icon.png')}
+      		                              />
+      		                              <View style={styles.titleContent}>
+      		                                    <Text style={styles.titleText}>{item.conversations.activityName}</Text>
 
-		                              </View>
-		                              <View style={styles.goingContent}>                                 
-		                                  <Image
-		                                      style={styles.rightImg}
-		                                      source={require('.././images/black-rightarrow.png')}
-		                              		/>
+      		                              </View>
+      		                              <View style={styles.goingContent}>                                 
+      		                                  <Image
+      		                                      style={styles.rightImg}
+      		                                      source={require('.././images/black-rightarrow.png')}
+      		                              		/>
 
-		                              </View>
-		                    </View>                              
-                            <Text style={styles.areaText}>16 APR Fri 2019,Morning, Cricket @ Rasoolpura</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() =>this.props.navigation.navigate('')}>
-            		<View style={styles.contentView}>
-		              		<View style={styles.profileContent}>
-		                              <Image
-		                                      style={styles.profileImg}
-		                                      source={require('.././images/user-icon.png')}
-		                              />
-		                              <View style={styles.titleContent}>
-		                                    <Text style={styles.titleText}>Your activity</Text>
-		                              </View>
-		                              <View style={styles.goingContent}>                                 
-		                                  <Image
-		                                      style={styles.rightImg}
-		                                      source={require('.././images/black-rightarrow.png')}
-		                              		/>
-		                              </View>
-		                    </View>                              
-                            <Text style={styles.areaText}>16 APR Fri 2019,Morning, Cricket @ Rasoolpura</Text>
-                    </View>
-                </TouchableOpacity>
-
-
-
-                              
-
-            </View> 
+      		                              </View>
+      		                    </View>                              
+                                  <Text style={styles.areaText}>{item.conversations.activityAddress}</Text>
+                          </View>
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={() =>this.props.navigation.navigate('')}>
+                  		    <View style={styles.contentView}>
+      		              		<View style={styles.profileContent}>
+      		                              <Image
+      		                                      style={styles.profileImg}
+      		                                      source={require('.././images/user-icon.png')}
+      		                              />
+      		                              <View style={styles.titleContent}>
+      		                                    <Text style={styles.titleText}>{item.conversations.activityName}</Text>
+      		                              </View>
+      		                              <View style={styles.goingContent}>                                 
+      		                                  <Image
+      		                                      style={styles.rightImg}
+      		                                      source={require('.././images/black-rightarrow.png')}
+      		                              		/>
+      		                              </View>
+      		                    </View>                              
+                                  <Text style={styles.areaText}>{item.conversations.activityAddress}</Text>
+                          </View>
+                      </TouchableOpacity>                            
+                  </View> 
+            }
+          keyExtractor={item => item.conversations}
+          />
     </SafeAreaView>
      
    );
@@ -137,7 +139,6 @@ const styles = StyleSheet.create({
   goingContent:
   {
     marginLeft:'auto',
-    // alignItems:"center"
   },
   rightImg:
   {
@@ -156,3 +157,14 @@ const styles = StyleSheet.create({
 });
 
 
+var dataDump =[
+  {
+    "conversations": 
+    {
+      "activityName":"Your activity",
+      "activityAddress":"16 APR Fri 2019,Morning, Cricket @ Rasoolpura",
+      
+    },
+  }
+
+]

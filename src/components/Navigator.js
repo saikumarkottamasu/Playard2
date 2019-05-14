@@ -13,11 +13,11 @@ import select_Sports from './select_Sports';
 import select_Location from './select_Location';
 import select_Date from './select_Date';
 import select_Time from './select_Time';
-
 import activity_view from './activity_view';
 import send_query from './send_query';
 import join_activity from './join_activity';
 import see_all from './see_all';
+
 
 import Conversations from './Conversations';
 import Chat from './Chat';
@@ -27,6 +27,7 @@ import see_Map from './see_Map';
 import Venues from './Venues';
 import search_Venue from './search_Venue';
 import Notifications from './Notifications';
+import notification_Invitation from './notification_Invitation';
 
 import Splashscreen from './Splashscreen';
 
@@ -58,6 +59,8 @@ import Splashscreen from './Splashscreen';
 		Venues: {screen: Venues},
 		search_Venue: {screen: search_Venue},
 		Notifications: {screen: Notifications},
+		notification_Invitation: {screen: notification_Invitation},
+
 
 		Splashscreen: { screen: Splashscreen },
 	},

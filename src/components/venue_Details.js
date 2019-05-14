@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
  contentBody:
   {
-    padding:10
+    padding:15
   },
  searchImg:
   {
@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
     color:"#363f4d",
     fontSize:20,
     fontFamily:"TwCenMTStd",
+    marginTop:-5
   },
   starImg:
   {
@@ -205,7 +206,7 @@ signInBtn:
   operationalText:
   {
     color:"#33cbf6",
-    fontSize:20,
+    fontSize:18,
     fontFamily:"TwCenMTStd",
   },
   joinActivityBtn:

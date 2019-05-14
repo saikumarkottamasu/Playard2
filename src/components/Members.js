@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text,SafeAreaView,TextInput,TouchableOpacity,ScrollView,TouchableHighlight,Image,View } from 'react-native';
+import { StyleSheet, Text,SafeAreaView,TextInput,FlatList,TouchableOpacity,ScrollView,TouchableHighlight,Image,View } from 'react-native';
 
 
 export default class Members extends React.Component {
@@ -18,13 +18,17 @@ static navigationOptions = {
                       </TouchableOpacity>
                       <Text style={styles.profileText}>Members</Text>
               	</View>
+            <FlatList
+		          data={dataDump}
+		          showsVerticalScrollIndicator={false}
+		          renderItem={({item,index}) => 
               	<View style={styles.contentBody}>
 			              	<View style={styles.profileContent}>
 			                            <Image
 			                                style={styles.profileImg}
 			                                source={require('.././images/user-icon.png')}
 			                              />
-			                            <Text style={styles.titleText}>Playard Admin</Text>              
+			                            <Text style={styles.titleText}>{item.members.title}</Text>              
 			                </View>
 			                <View style={styles.profileContent}>
 			                            <Image
@@ -48,7 +52,9 @@ static navigationOptions = {
 			                            <Text style={styles.titleText}>Abinesh Patel</Text>              
 			                </View>                                  
               	</View>
-
+              	 }
+          keyExtractor={item => item.conversations}
+          />
                 
     </SafeAreaView>
      
@@ -104,4 +110,13 @@ const styles = StyleSheet.create({
   },
 });
 
+var dataDump =[
+  {
+    "members": 
+    {
+      "title":"Playard Admin",
+      
+    },
+  }
 
+]

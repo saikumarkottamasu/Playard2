@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, FlatList,SafeAreaView,TouchableOpacity,Image, StyleSheet,ActivityIndicator } from 'react-native';
 import { ListItem, SearchBar } from 'react-native-elements';
 
- export default class Notifications extends Component {
+export default class notification_Invitation extends Component {
   static navigationOptions = {
        header: null,
     };    
@@ -63,41 +63,14 @@ import { ListItem, SearchBar } from 'react-native-elements';
                       <Text style={styles.profileText}>Notifications</Text>
                 </View>
                 <View style={styles.upcomingWrapper}>
-                  <Text style={styles.updateText}>Updates</Text>
-                        <TouchableOpacity onPress={() =>this.props.navigation.navigate('notification_Invitation')}>
-                            <Text style={styles.invitationText}>Invitation</Text>
-                        </TouchableOpacity>
+                      <TouchableOpacity onPress={() =>this.props.navigation.navigate('Notifications')}>
+                            <Text style={styles.updateText}>Updates</Text>
+                      </TouchableOpacity>
+                  <Text style={styles.invitationText}>Invitation</Text>
                                
               </View>
 
-                 <FlatList
-                  data={this.state.data}
-                  renderItem={({ item }) => (
-
-                        <View style={styles.contentView}>
-                            <View style={styles.profileContent}>
-                                       
-                                        <Image source = {{ uri: item.picture.thumbnail }} style={styles.profileImg} />
-                                        <View style={styles.titleContent}>
-                                              <Text style={styles.titleText}>{item.name.first}</Text>
-                                              <Text style={styles.areaText}>{item.name.last}</Text>
-
-                                        </View>
-                                        <View style={styles.goingContent}>                                 
-                                            <Image
-                                                style={styles.rightImg}
-                                                source={require('.././images/black-rightarrow.png')}
-                                            />
-                                        </View>
-                              </View>                              
-                        </View>
-                     
-                         
-                )}
-
-                keyExtractor={item => item.email}
-                ListHeaderComponent={this.renderHeader}
-            />
+               
                       <View style={styles.contentView}>
                             <View style={styles.profileContent}>
                                        
@@ -120,7 +93,6 @@ import { ListItem, SearchBar } from 'react-native-elements';
     );
   }
 }
-
 
 
 const styles = StyleSheet.create({
@@ -171,7 +143,7 @@ const styles = StyleSheet.create({
   titleText:
   {
     color:"#363f4d",
-    fontSize:20,
+    fontSize:18,
     fontFamily:"TwCenMTStd",
   },
   titleContent:
@@ -215,14 +187,14 @@ upcomingWrapper:
   },
   invitationText:
   {
-    color:"#999999",
+    color:"#33cbf6",
     fontSize:16,
     fontFamily:"TwCenMTStd",
     marginLeft:50
   },
    updateText:
   {
-    color:"#33cbf6",
+    color:"#999999",
     fontSize:16,
     fontFamily:"TwCenMTStd",
   },

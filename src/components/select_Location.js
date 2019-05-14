@@ -160,11 +160,8 @@ else {
                                   value={this.state.searchText}
                                   returnKeyType = { "done" }
                                   onSubmitEditing={() => {
-                                    if(this.state.searchText.length>0){
-                                    this.getLocationsAndVenues()} }}
-
-
-
+                                  if(this.state.searchText.length>0){
+                                  this.getLocationsAndVenues()} }}
                                 />
                             <View style={styles.eyeView}>
                                 <TouchableOpacity onPress={() => {
