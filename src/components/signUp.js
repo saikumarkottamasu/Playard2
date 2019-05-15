@@ -201,7 +201,7 @@ export default class signUp extends Component<Props> {
                <ScrollView>
                   <View style={styles.container}>
                       <View style={{marginBottom:20}}>
-                            <Text style={styles.signInText}>SIGN UP WITH</Text>
+                            <Text style={styles.signInText}>SIGN UP </Text>
                             <Text style={styles.signInText}>YOUR</Text>
                             <Text style={styles.signInText}>ACCOUNT</Text>
                       </View>
