@@ -39,10 +39,9 @@ static navigationOptions = {
     renderGridItem(this2,item){
    if(item){
      return (
-                             <TouchableOpacity
+                      <TouchableOpacity
                              onPress={() =>this2.markSelectedSport(item)} style={styles.accBody}>
                                    <View style={styles.inlineWrapper}>
-
                                          <View style={styles.itemWrapper}>
                                              <Image
                                                style={styles.sportIconImg}
@@ -55,11 +54,8 @@ static navigationOptions = {
                                                null
                                              }
                                          </View>
-
-
                                    </View>
-
-                             </TouchableOpacity>
+                    </TouchableOpacity>
 
 
 

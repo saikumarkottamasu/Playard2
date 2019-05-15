@@ -95,7 +95,7 @@ export default class Cricket extends Component {
                   <Text style={styles.upcomingText}>Venues</Text>
 
                   <View style={styles.signInBtn}>
-                           <TouchableOpacity onPress={() => this.props.navigation.navigate('venues')}> 
+                           <TouchableOpacity onPress={() => this.props.navigation.navigate('Venues')}> 
                                   <Text style={styles.signInBtnText}>See all</Text>
                             </TouchableOpacity>
                   </View>

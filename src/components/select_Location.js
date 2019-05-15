@@ -263,7 +263,6 @@ const styles = StyleSheet.create({
     marginRight:5,
     marginLeft:10
   },
-
   inputField:
   {
     borderColor: '#dadada',

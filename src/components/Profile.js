@@ -1,17 +1,126 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet,TouchableOpacity,TouchableHighlight, Text, View,Button,Image,ScrollView} from 'react-native';
+import {Platform, StyleSheet,TouchableOpacity,TouchableHighlight,FlatList, Text, View,Button,Image,ScrollView} from 'react-native';
 import Icon from 'react-native-ionicons';
+var GLOBAL = require('.././config/global.js');
 
 
 export default class Profile extends Component {
     static navigationOptions = {
        header: null,
     };
+  constructor(props) 
+    {
+      super(props);
+        this.state = 
+              {
+                userId: '1', 
+                activities: [],
+                loading: false,
+
+              };
+
+    }
+   
+  get_activities = async () => 
+    {
+            this.setState({ loading: true });
+
+        let formData = new FormData();
+        formData.append('userId', this.state.userId);
+       
+        let data = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                "Content-Type": "multipart/form-data",
+            },
+            body: formData
+        }
+        fetch("http://testingmadesimple.org/playard/api/service/activities", data)
+        .then(response => response.json())
+        .then(responseJson => 
+         { 
+            
+                  if(responseJson.status == ("1"))
+                   {
+                       alert("success");
+                         this.setState({                       
+                          activities:responseJson['activities']
+                      });
+                    }                   
+                    else
+                    {
+                      alert("No data found");
+
+                    }
+                   console.log('response:', responseJson)
+          }
+        )
+       .catch(error => console.error(error));
+        console.log(data)
+        console.log(this.state)
+    }
+
+    _renderActivityList(item){
+    return(
+                              <TouchableOpacity onPress={() => this.props.navigation.navigate('')}>
+
+                    <View style={styles.listBody}>
+                          <View style={{flexDirection:"row",marginBottom:10}}>
+                              <View style={styles.dateContent}>
+                                    <Text style={styles.dateText}>{item.activityDate}</Text>
+                                    <Text style={styles.monthText}>Fri,2019</Text>
+                              </View>
+                              <View style={styles.typeContent}>
+                                    <Text style={styles.dateText}>{item.sportName}</Text>
+                                    <View style={{flexDirection:"row",marginTop:5}}>
+                                          <Image
+                                          style={styles.smallLocationImg}
+                                          source={require('.././images/timer-icon.png')} />
+                                          <Text style={styles.areaText}>{item.timeslot}</Text>
+                                    </View>
+                              </View>
+                              <View style={styles.areaContent}>
+                                    <Text style={styles.dateText}> </Text>
+                                    <View style={{flexDirection:"row",marginTop:5}}>
+                                          <Image
+                                          style={styles.smallLocationImg}
+                                          source={require('.././images/location-small.png')} />
+                                          <Text style={styles.areaText}>{item.localityName}</Text>
+                                    </View>
+                              </View>
+                          </View>
+                          <View style={styles.profileContent}>
+                                    <Image
+                                            style={styles.profileImg}
+                                            source={require('.././images/user-icon.png')}
+                                    />
+                                    <View style={styles.titleContent}>
+                                          <Text style={styles.titleText}>{item.username}</Text>
+                                          <Text style={styles.underlineText}>{item.skillType}</Text>
+
+                                    </View>
+                                    <View style={styles.goingContent}>
+                                        <View style={{marginLeft:'auto'}}>
+                                                   <Image
+                                                  style={styles.goingImg}
+                                                  source={require('.././images/going-icon.png')} />
+                                        </View>
+                                        <Text style={styles.goingText}>20 going</Text>
+
+                                    </View>
+                          </View>
+                  </View>
+            </TouchableOpacity>
+
+
+
+    )
+    }
   render() {
     return (
       <View style={styles.container}>
               <View style={styles.cartHeader}>
-
                     <View style={styles.profileView}>
                           <Text style={styles.profileText}>Rasoolpura</Text>
                           <View style={[styles.iconContainer,{marginLeft:5}]}>
@@ -20,7 +129,6 @@ export default class Profile extends Component {
                                 source={require('.././images/location-checked.png')} />
                           </View>
                     </View>
-
                     <View style={{marginLeft:'auto',flexDirection:"row",marginRight:15}}>
                         <View style={styles.iconContainer}>
                               <TouchableOpacity onPress={() =>{GLOBAL.sport= ''; this.props.navigation.navigate('create_Activity')}}>                  
@@ -70,153 +178,20 @@ export default class Profile extends Component {
               <View style={styles.upcomingWrapper}>
                   <Text style={styles.upcomingText}>Upcoming Activities</Text>
                   <View style={styles.signInBtn}>
-                            <TouchableOpacity>
+                            <TouchableOpacity >
                                   <Text style={styles.signInBtnText}>See all</Text>
                             </TouchableOpacity>
                   </View>
               </View>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('activity_view')}>
+              <View style={{height:450}}>
+                   <FlatList
+                        data={this.state.activities}
+                         renderItem={({ item }) => this._renderActivityList(item)}                    
+                  keyExtractor={item => item.username}
+                />
+              </View>
 
-              <View style={styles.listBody}>
-                    <View style={{flexDirection:"row",marginBottom:10}}>
-                        <View style={styles.dateContent}>
-                              <Text style={styles.dateText}>19 Apr</Text>
-                              <Text style={styles.monthText}>Fri,2019</Text>
-                        </View>
-                        <View style={styles.typeContent}>
-                              <Text style={styles.dateText}>Cricket</Text>
-                              <View style={{flexDirection:"row",marginTop:5}}>
-                                    <Image
-                                    style={styles.smallLocationImg}
-                                    source={require('.././images/timer-icon.png')} />
-                                    <Text style={styles.areaText}>Morning</Text>
-                              </View>
-                        </View>
-                        <View style={styles.areaContent}>
-                              <Text style={styles.dateText}> </Text>
-                              <View style={{flexDirection:"row",marginTop:5}}>
-                                    <Image
-                                    style={styles.smallLocationImg}
-                                    source={require('.././images/location-small.png')} />
-                                    <Text style={styles.areaText}>Rasoolpura</Text>
-                              </View>
-                        </View>
-                    </View>
-                    <View style={styles.profileContent}>
-                              <Image
-                                      style={styles.profileImg}
-                                      source={require('.././images/user-icon.png')}
-                              />
-                              <View style={styles.titleContent}>
-                                    <Text style={styles.titleText}>Neeraja</Text>
-                                    <Text style={styles.underlineText}>Intermediate</Text>
-
-                              </View>
-                              <View style={styles.goingContent}>
-                                  <View style={{marginLeft:'auto'}}>
-                                             <Image
-                                            style={styles.goingImg}
-                                            source={require('.././images/going-icon.png')} />
-                                  </View>
-                                  <Text style={styles.goingText}>20 going</Text>
-
-                              </View>
-                    </View>
-            </View>
-            </TouchableOpacity>
-              <View style={styles.listBody}>
-                    <View style={{flexDirection:"row",marginBottom:10}}>
-                        <View style={styles.dateContent}>
-                              <Text style={styles.dateText}>20 Apr</Text>
-                              <Text style={styles.monthText}>Sat,2019</Text>
-                        </View>
-                        <View style={styles.typeContent}>
-                              <Text style={styles.dateText}>Tennis</Text>
-                              <View style={{flexDirection:"row",marginTop:5}}>
-                                    <Image
-                                    style={styles.smallLocationImg}
-                                    source={require('.././images/timer-icon.png')} />
-                                    <Text style={styles.areaText}>Evening</Text>
-                              </View>
-                        </View>
-                        <View style={styles.areaContent}>
-                              <Text style={styles.dateText}> </Text>
-                              <View style={{flexDirection:"row",marginTop:5}}>
-                                    <Image
-                                    style={styles.smallLocationImg}
-                                    source={require('.././images/location-small.png')} />
-                                    <Text style={styles.areaText}>Rasoolpura</Text>
-                              </View>
-                        </View>
-                    </View>
-                     <View style={styles.profileContent}>
-                              <Image
-                                      style={styles.profileImg}
-                                      source={require('.././images/user-icon.png')}
-                              />
-                              <View style={styles.titleContent}>
-                                    <Text style={styles.titleText}>Parvathi</Text>
-                                    <Text style={styles.underlineText}>Beginner</Text>
-                              </View>
-                              <View style={styles.goingContent}>
-                                  <View style={{marginLeft:'auto',marginTop:10}}>
-                                             <Image
-                                            style={styles.goingImg}
-                                            source={require('.././images/lock-icon.png')} />
-                                  </View>
-
-                              </View>
-                    </View>
-            </View>
-              <View style={styles.listBody}>
-                    <View style={{flexDirection:"row",marginBottom:10}}>
-                        <View style={styles.dateContent}>
-                              <Text style={styles.dateText}>21 Apr</Text>
-                              <Text style={styles.monthText}>Sun,2019</Text>
-                        </View>
-                        <View style={styles.typeContent}>
-                              <Text style={styles.dateText}>Cricket</Text>
-                              <View style={{flexDirection:"row",marginTop:5}}>
-                                    <Image
-                                    style={styles.smallLocationImg}
-                                    source={require('.././images/timer-icon.png')} />
-                                    <Text style={styles.areaText}>Morning</Text>
-                              </View>
-                        </View>
-                        <View style={styles.areaContent}>
-                              <Text style={styles.dateText}> </Text>
-                              <View style={{flexDirection:"row",marginTop:5}}>
-                                    <Image
-                                    style={styles.smallLocationImg}
-                                    source={require('.././images/location-small.png')} />
-                                    <Text style={styles.areaText}>Rasoolpura</Text>
-                              </View>
-                        </View>
-                    </View>
-                    <View style={styles.profileContent}>
-                              <Image
-                                      style={styles.profileImg}
-                                      source={require('.././images/user-icon.png')}
-                              />
-                              <View style={styles.titleContent}>
-                                    <Text style={styles.titleText}>Neeraja</Text>
-                                    <Text style={styles.underlineText}>Intermediate</Text>
-
-                              </View>
-                              <View style={styles.goingContent}>
-                                  <View style={{marginLeft:'auto'}}>
-                                  <TouchableHighlight onPress={() => this.props.navigation.navigate('select_Sports')}>
-                                             <Image
-                                            style={styles.goingImg}
-                                            source={require('.././images/going-icon.png')} />
-                                     </TouchableHighlight>
-                                  </View>
-
-                                  <Text style={styles.goingText}>20 going</Text>
-                              </View>
-                    </View>
-            </View>
-
+              
       </View>
 
     );
@@ -326,7 +301,8 @@ headerText:
     borderRadius:10,
     width:65,
     marginLeft:'auto',
-    marginRight:10
+    marginRight:10,
+    padding:10
   },
   signInBtnText:
   {

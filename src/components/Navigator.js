@@ -69,6 +69,8 @@ import Playing from './managePlayers';
 		send_query: {screen: send_query},
 		join_activity: {screen: join_activity},
 		see_all: {screen: see_all},
+		Mysports: {screen: Mysports},
+		
 		Conversations: {screen: Conversations},
 		Chat: {screen: Chat},
 		Members: {screen: Members},
@@ -78,7 +80,6 @@ import Playing from './managePlayers';
 		search_Venue: {screen: search_Venue},
 		Notifications: {screen: Notifications},
 		notification_Invitation: {screen: notification_Invitation},
-		Mysports: { screen:Mysports  },	
 
 		Gamebook: { screen: Gamebook },
 
@@ -101,7 +102,7 @@ import Playing from './managePlayers';
 		Splashscreen: { screen: Splashscreen },
 	},
 	{
-    	initialRouteName: 'signUp',
+    	initialRouteName: 'Profile',
   	}
 
 );

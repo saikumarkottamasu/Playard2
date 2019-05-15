@@ -90,8 +90,7 @@ import { ListItem, SearchBar } from 'react-native-elements';
                                             />
                                         </View>
                               </View>                              
-                        </View>
-                     
+                        </View>                     
                          
                 )}
 

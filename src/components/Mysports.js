@@ -89,7 +89,6 @@ export default class Mysports extends Component {
                   
 
 
-
               </View>
               <View style={styles.listBody}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Cricket')}>
@@ -133,6 +132,7 @@ export default class Mysports extends Component {
                     </View>
                     </TouchableOpacity>
             </View>
+
 
             <View style={styles.listBody}>
                     
@@ -385,5 +385,3 @@ headerText:
   },
 
 });
-
-
