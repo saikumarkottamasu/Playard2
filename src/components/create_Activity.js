@@ -62,11 +62,18 @@ static navigationOptions = {
       }
 
 createActivity(){
-  console.log("@@@",GLOBAL.user_id);
-  this.setState({sportId:GLOBAL.sport})
-  console.log("%%%%",this.state);
   let formData = new FormData();
-  if(GLOBAL.sport == ''){
+  if(GLOBAL.user_id == ''){
+    Alert.alert(
+      'Error',
+      'Please Login or Signup to create activity',
+      [
+        {text: 'ok'}
+      ],
+      { cancelable: true }
+    )
+  }
+  else if(this.state.sportId == ''){
     Alert.alert(
       'Error',
       'Please select a game to create activity',
@@ -133,7 +140,7 @@ createActivity(){
     }
     this.setState({spinnerVisibility: true, loadingMessage: 'Creating activity, Please wait...'})
     formData.append('userId', GLOBAL.user_id);
-    formData.append('sportId', GLOBAL.sport );
+    formData.append('sportId', this.state.sportId);
     formData.append('venueId', this.state.venueId);
     formData.append('activityDate', this.state.activityDate);
     formData.append('startTime', this.state.startTime);
@@ -155,12 +162,9 @@ createActivity(){
     .then(response => response.json())
     .then(responseJson =>
      {
-       console.log("####",responseJson);
-       console.log("@@@@!!",formData);
             this.setState({spinnerVisibility: false})
             if(responseJson.status == ("1"))
                {
-                 GLOBAL.sport=''
                  Alert.alert(
                    'Success',
                    'Successfully Created the activity',
@@ -207,7 +211,7 @@ createActivity(){
           <ScrollView>
 
                   <View style={styles.contentBody}>
-                  <TouchableOpacity onPress={() => this.props.navigation.navigate('select_Sports')}>
+                  <TouchableOpacity onPress={() => this.props.navigation.navigate('select_Sports',{createActivity: this})}>
                       <View style={styles.itemWrapper}>
                              <Text style={styles.selectSport}>Select Sport</Text>
                             <View style={styles.textWrapper}>

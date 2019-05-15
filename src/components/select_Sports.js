@@ -4,33 +4,12 @@ import { StyleSheet, Text,TextInput,TouchableOpacity,SafeAreaView
 from 'react-native';
 import Icon from 'react-native-ionicons';
 import { Separator } from 'native-base';
-import {Collapse,CollapseHeader,CollapseBody, AccordionList} from
-'accordion-collapse-react-native';
 import GridLayout from 'react-native-layout-grid';
 var GLOBAL = require('.././config/global.js');
 
 
 
-function renderGridItem(item){
-  // console.log("##########@@@!@@DOne",item);
-if(item){
-  let user = new select_Sports();
-// user.markSelectedSport();
-  return (
-                          <TouchableOpacity onPress={() =>user.markSelectedSport(item)} style={styles.accBody}>
-                                <View style={styles.inlineWrapper}>
-                                      <View style={styles.itemWrapper}>
-                                          <Image
-                                            style={styles.sportIconImg}
-                                            source={require('.././images/cricket.png')} />
-                                            <Text style={styles.bodyText}>{item.sportName}</Text>
-                                      </View>
-                                </View>
-                          </TouchableOpacity>
 
-  );
-}
-}
 export default class select_Sports extends React.Component {
   constructor(props) {
   super(props);
@@ -49,48 +28,99 @@ export default class select_Sports extends React.Component {
        title: '2',
        body: '2 body'
      }
-     ]
+   ],
+   selectedSportId: ''
   }
 }
 static navigationOptions = {
        header: null
     };
 
-    setgame(item){
-      console.log("#@@@###",this);
-    }
-    markSelectedSport(item){
-      console.log("@@!!!!!!markSelectedSport", this);
-      temp = GLOBAL.sports_list
+    renderGridItem(this2,item){
+   if(item){
+     return (
+                             <TouchableOpacity
+                             onPress={() =>this2.markSelectedSport(item)} style={styles.accBody}>
+                                   <View style={styles.inlineWrapper}>
 
-     for(sports of temp){
-       console.log("@@@",sports);
-       for(sport of sports['sports']){
-         if(sport.sportName == item.sportName){
-           sport.isSelected=true
-         }
-         console.log("###sport",sport);
-       }
-     }
-      GLOBAL.sports_list = temp
-      Alert.alert(
-        'Confirmation',
-        'Are you sure wants to select the game?',
-        [
-          {text: 'Yes', onPress: () =>  {GLOBAL.sport=item.sportId}},
-          {text: 'No'}
-        ],
-        { cancelable: true }
-      )
+                                         <View style={styles.itemWrapper}>
+                                             <Image
+                                               style={styles.sportIconImg}
+                                               source={require('.././images/cricket.png')} />
+                                               <Text style={styles.bodyText}>{item.sportName}</Text>
+                                               {item.isSelected?
+                                               <View style={styles.blueIcon}>
+                                               </View>
+                                               :
+                                               null
+                                             }
+                                         </View>
+
+
+                                   </View>
+
+                             </TouchableOpacity>
+
+
+
+     );
+   }
    }
 
-    _head(item){
-      // console.log("####",item);
+makeIsViewedTrue(item){
+    let dataClone = this.state.sportsList
+  for ( sports of dataClone){
+    if(sports['categoryId'] == item['categoryId']){
+      sports['isListViewed'] = !sports['isListViewed']
+    }
+    else{
+      sports['isListViewed'] = false
+    }
+  }
+  this.setState({sportsList:dataClone})
+}
+
+markSelectedSport(item){
+
+  temp = this.state.sportsList
+
+ for(sports of temp){
+   let anySPortSelected = false
+   for(sport of sports['sports']){
+     let is_found = false
+     if(sport.sportName == item.sportName){
+       sport.isSelected=true
+       is_found =true
+       sports['isAnySportSelected']= true
+       anySPortSelected = true
+     }
+     else {
+       if(!anySPortSelected){
+       sports['isAnySportSelected']= false
+     }
+       sport.isSelected=false
+     }
+   }
+ }
+ this.setState({statesportsList: temp,selectedSportId: item.sportId})
+  GLOBAL.sports_list = temp
+  // Alert.alert(
+  //   'Confirmation',
+  //   'Are you sure wants to select the game?',
+  //   [
+  //     {text: 'Yes', onPress: () =>  {GLOBAL.sport=item.sportId}},
+  //     {text: 'No'}
+  //   ],
+  //   { cancelable: true }
+  // )
+}
+    renderRow(item){
       return(
-        <View style={styles.accHeader}>
+          <View style={{flex: 1, borderWidth: 1, marginTop: 20, borderColor: '#d7d7d7', borderRadius:5}}>
+        <TouchableOpacity onPress={() =>this.makeIsViewedTrue(item)} style={styles.accHeader}>
             <View style={{flexDirection:"row",alignItems:"center"}}>
               <Text style={styles.accHeaderText}>{item.categoryName}</Text>
-              {item.isListViewed?
+              {item.isListViewed || item.isAnySportSelected?
               <Image
                   style={styles.checkedGreenImg}
                   source={require('.././images/checked-icon.png')} />
@@ -99,98 +129,34 @@ static navigationOptions = {
                 }
             </View>
             <View style={styles.iconContainer}>
+            {
+              item.isListViewed?
+              <Image
+                  style={styles.dropdownImg}
+                  source={require('.././images/black-uparrow.png')} />
+                  :
               <Image
                   style={styles.dropdownImg}
                   source={require('.././images/black-downarrow.png')} />
+                }
+
             </View>
+          </TouchableOpacity>
+          <View style={{flex: 1}}>
+          {item.isListViewed?
+          <GridLayout
+          items= {item['sports']}
+          itemsPerRow={2}
+
+          renderItem={(item)=>this.renderGridItem(this,item)}
+          />
+          :
+          null
+        }
+          </View>
           </View>
       )
-
     }
-
-    _body(item){
-      // console.log("itemitem%%%",item['sports']);
-      // console.log(("&&&&&&",typeof(renderGridItem)));
-      console.log("#####body",item);
-      return(
-        <View style={{flex: 1}}>
-          <FlatList
-          data={item['sports']}
-          renderItem={({item}) => renderGridItem(item)}
-          extraData={this.state}
-        />
-        </View>
-
-      );
-      // <GridLayout
-      //   items= {item['sports']}
-      //   itemsPerRow={2}
-      //   renderItem={renderGridItem(item)}
-      // />
-      // return (
-      //
-      //                         <View style={styles.accBody}>
-      //                               <View style={styles.inlineWrapper}>
-      //
-      //                                     <View style={styles.itemWrapper}>
-      //                                         <Image
-      //                                           style={styles.sportIconImg}
-      //                                           source={require('.././images/cricket.png')} />
-      //                                           <Text style={styles.bodyText}>Cricket</Text>
-      //                                     </View>
-      //                                     <View style={styles.itemWrapper}>
-      //                                         <Image
-      //                                           style={styles.sportIconImg}
-      //                                           source={require('.././images/table-tennis.png')} />
-      //                                         <Text style={styles.bodyText}>Table Tennis</Text>
-      //                                         <View style={styles.blueIcon}>
-      //                                         </View>
-      //                                     </View>
-      //
-      //                               </View>
-      //                               <View style={styles.inlineWrapper}>
-      //                                     <View style={styles.itemWrapper2}>
-      //                                         <Image
-      //                                           style={styles.sportIconImg}
-      //                                           source={require('.././images/foot-ball.png')} />
-      //                                           <Text style={styles.bodyText}>Football</Text>
-      //                                     </View>
-      //
-      //                                     <View style={styles.itemWrapper2}>
-      //                                         <Image
-      //                                           style={styles.sportIconImg}
-      //                                           source={require('.././images/basket-ball.png')} />
-      //                                           <Text style={styles.bodyText}>Basket Ball</Text>
-      //                                     </View>
-      //
-      //
-      //                               </View>
-      //                         </View>
-      //
-      //
-      //
-      // );
-
-
-    }
-
-onToggle(index){
-
-  if(index!=null){
-
-    let sportsList = this.state.sportsList
-
-    if(!sportsList[index]['isListViewed']){
-      for (sports of sportsList){
-        sports['isListViewed']= false
-      }
-    sportsList[index]['isListViewed']=true
-    this.setState({sportsList: sportsList})
-    GLOBAL.sports_list=sportsList
-  }
-  }
-
-}
 
 componentWillMount(){
   this.setState({spinnerVisibility: true, loadingMessage: 'Getting sports list, Please wait...'})
@@ -255,15 +221,30 @@ spinnerComponent() {
     }
     }
 
+confirmation(){
+  if(this.state.selectedSportId != ''){
+  Alert.alert(
+    'Confirmation',
+    'Are you sure wants to select the game?',
+    [
+      {text: 'Yes', onPress: () =>  {  this.props.navigation.state.params.createActivity.setState({sportId:this.state.selectedSportId},()=>{this.props.navigation.navigate('create_Activity')})}},
+      {text: 'No'}
+    ],
+    { cancelable: true }
+  )
+}
+else{
+  this.props.navigation.navigate('create_Activity')
+}
+}
  render()
  {
-   console.log("$$$$$$$$$$$$$$");
    if(!this.state.spinnerVisibility)
    {
    return(
     <SafeAreaView style={{flex:1}}>
               <View style={styles.cartHeader}>
-                      <TouchableOpacity onPress={() =>this.props.navigation.navigate('create_Activity')}>
+                      <TouchableOpacity onPress={() =>this.confirmation()}>
                            <Image
                           style={styles.searchImg}
                           source={require('.././images/back-arrow-white.png')} />
@@ -288,17 +269,11 @@ spinnerComponent() {
                             </TouchableOpacity >
                           </View>
                   </View>
-
-
-                  <AccordionList
-                             list={this.state.sportsList}
-                             header={this._head}
-                             body={this._body}
-                             // body={(item) => { this._body(item)}}
-
-                               onToggle={(index) => { this.onToggle(index)}}
-                           />
-
+                           <FlatList
+                           data={this.state.sportsList}
+                           renderItem={({item}) => this.renderRow(item)}
+                           extraData={this.state}
+                         />
 
               </View>
             </ScrollView>
@@ -381,30 +356,16 @@ accordionContainer:
 accHeader:
   {
     flexDirection:"row",
-    borderColor:'#d7d7d7',
-    borderTopWidth: 1,
-    borderRadius:5,
-
     marginTop:10,
-    borderBottomWidth: 1,
    marginBottom:10,
-    paddingTop:10,
-    paddingBottom:10,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
+    paddingTop:5,
+    paddingBottom:5,
 
   },
 accBody:
   {
     flexDirection:"row",
-     borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderColor:'#d7d7d7',
-    borderBottomWidth: 1,
-    borderRadius:5,
-    paddingTop:15,
-    marginBottom:10,
-    marginTop:-10,
+
     // backgroundColor:"pink"
   },
 
@@ -471,7 +432,16 @@ checkedGreenImg:
   {
     width:12,
     height:12,
-    marginLeft:5
+    marginLeft:20
   },
+  blueIcon:
+{
+  height:8,
+  width:8,
+  backgroundColor:"#33cbf6",
+  borderRadius:50,
+  marginLeft:5,
+
+},
 
 });
