@@ -30,6 +30,24 @@ import Notifications from './Notifications';
 import notification_Invitation from './notification_Invitation';
 
 import Splashscreen from './Splashscreen';
+import Mysports from './Mysports';
+
+import Gamebook from './Gamebook';
+import Cricket from './Cricket';
+import edit from './edit';
+
+import Seequeries from './Seequeries';
+import activity_edit from './activity_edit';
+import filterIcon from './filterIcon';
+import Filter_select_sports from './Filter_select_sports';
+import Filter_select_time from './Filter_select_time';
+import Filter_select_skill from './Filter_select_skill';
+import Filter_select_date from './Filter_select_date';
+// import sortIcon from './sortIcon';
+import modify_Activity from './modify_Activity';
+import managePlayers from './managePlayers';
+import Playing from './managePlayers';
+
 
  const Navigator = createStackNavigator
 (	{
@@ -60,6 +78,24 @@ import Splashscreen from './Splashscreen';
 		search_Venue: {screen: search_Venue},
 		Notifications: {screen: Notifications},
 		notification_Invitation: {screen: notification_Invitation},
+		Mysports: { screen:Mysports  },	
+
+		Gamebook: { screen: Gamebook },
+
+		Cricket: { screen: Cricket },
+		
+		edit: { screen: edit },
+		activity_edit: { screen: activity_edit },
+		Seequeries: { screen: Seequeries },
+		filterIcon: { screen: filterIcon },
+		Filter_select_sports: { screen: Filter_select_sports },
+		Filter_select_time: { screen: Filter_select_time },
+		Filter_select_skill: { screen: Filter_select_skill },
+		Filter_select_date: { screen: Filter_select_date },
+		// sortIcon: { screen:sortIcon  },	
+		modify_Activity: { screen:modify_Activity  },	
+		managePlayers: { screen:managePlayers  },
+			
 
 
 		Splashscreen: { screen: Splashscreen },

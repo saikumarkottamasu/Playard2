@@ -51,7 +51,7 @@ export default class Profile extends Component {
 
                     </View>
                     <View style={[styles.headerWrapper,{ borderBottomWidth: 0}]}>
-                        <TouchableHighlight onPress={() => this.props.navigation.navigate('Venues')}>
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('Mysports')}>
                             <View style={{flexDirection:"row"}}>
                               <Text style={[styles.headerText,{ color:"#daf3fb"}]}>My Sports</Text>
 
