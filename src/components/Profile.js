@@ -20,7 +20,9 @@ export default class Profile extends Component {
               };
 
     }
-   
+   componentWillMount(){
+    this.get_activities();
+   }
   get_activities = async () => 
     {
             this.setState({ loading: true });
