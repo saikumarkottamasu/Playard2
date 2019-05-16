@@ -45,7 +45,7 @@ getLocationsAndVenues(){
             this.setState({spinnerVisibility: false, venues:[], noresultsFound: true})
         }
         else{
-          this.setState({spinnerVisibility: false, isLocalityVenueSelected: false})
+          this.setState({spinnerVisibility: false, isLocalityVenueSelected: false, noresultsFound: false})
           this.displayError()
         }
     }

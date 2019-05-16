@@ -135,7 +135,7 @@ createActivity(){
   }
   else {
     let notify = 0
-    if(!this.state.notifyFriends){
+    if(this.state.notifyFriends){
       notify = 1
     }
     this.setState({spinnerVisibility: true, loadingMessage: 'Creating activity, Please wait...'})
@@ -150,6 +150,7 @@ createActivity(){
     formData.append('timeslot', this.state.timeslot);
     formData.append('notifyFriends', notify);
     formData.append('locality', this.state.locality);
+    console.log("@@@@formData",formData);
     let data = {
         method: 'POST',
         headers: {

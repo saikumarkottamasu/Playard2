@@ -11,35 +11,35 @@ export default class signIn extends React.Component {
   static navigationOptions = {
        header: null,
     };
-    constructor(props) 
+    constructor(props)
     {
-    super(props);   
-    this.state = 
-      { 
+    super(props);
+    this.state =
+      {
           showPassword: true,
-          mobileNumber: '', 
+          mobileNumber: '',
           password:'',
           deviceType:'android',
           deviceToken:'Testing',
           regType:'direct',
-          icEye: 'visibility-off', 
+          icEye: 'visibility-off',
           selected: "key1"
-        
+
         }
     }
   changePwdType = () => {
         let newState;
         if (this.state.showPassword)
          {
-            newState = 
+            newState =
             {
                 icEye: 'visibility',
                 showPassword: false,
                 password: this.state.password
             }
-        } else 
+        } else
         {
-            newState = 
+            newState =
             {
                 icEye: 'visibility-off',
                 showPassword: true,
@@ -48,7 +48,7 @@ export default class signIn extends React.Component {
         }
         this.setState(newState)
     };
-  handlePassword = (password) => 
+  handlePassword = (password) =>
     {
         let newState = {
             icEye: this.state.icEye,
@@ -95,17 +95,17 @@ pwdHideAndShow() {
 
         fetch("http://testingmadesimple.org/playard/api/service/login", data)
         .then(response => response.json())
-        .then(responseJson => 
+        .then(responseJson =>
             {
               if(responseJson.status == ("1"))
               {
-                  alert("Login Successfully");                  
+                  alert("Login Successfully");
                   this.props.navigation.navigate("Preffered_sports");
                        this.setState({
                                   mobileNumber: '',
                                   password:'',
-                                 
-                                })       
+
+                                })
               }
               else if(responseJson.status == ("0"))
               {
@@ -129,17 +129,17 @@ pwdHideAndShow() {
 
           )
         .catch(error => console.error(error));
-        
+
 
         console.log(data)
         console.log(this.state)
     }
- 
 
 
-    
 
- render() 
+
+
+ render()
  {
    return(
       <View style={{flex:1}}>
@@ -151,17 +151,17 @@ pwdHideAndShow() {
                             <Text style={styles.signInText}>ACCOUNT</Text>
                       </View>
                       <View>
-                       
+
                           <View style={styles.mobileWrapper}>
-                              <View style={styles.mobileText1}>                        
+                              <View style={styles.mobileText1}>
                                   <Picker
                                     note
-                                    mode="dropdown"                                   
+                                    mode="dropdown"
                                     selectedValue={this.state.selected}
                                     onValueChange={this.onValueChange.bind(this)}>
                                     <Picker.Item label="IND +91" value="key0" />
                                     <Picker.Item label="IND +91" value="key1" />
-                                    <Picker.Item label="UK +44" value="key2" />                                   
+                                    <Picker.Item label="UK +44" value="key2" />
                                   </Picker>
                               </View>
                               <Text style={{width:"3%"}}></Text>
@@ -177,46 +177,47 @@ pwdHideAndShow() {
                           <View style={{flexDirection:"row"}}>
                                  <TextInput
                                     placeholder="Password"
-                                        placeholderTextColor="#A9A9A9" 
+                                        placeholderTextColor="#A9A9A9"
 
                                     style={styles.passwordField}
                                     secureTextEntry={this.state.showPassword}
                                     value={this.state.password}
                                     onChangeText={this.handlePassword}
-                                  /> 
+                                  />
                                   <View style={styles.eyeView}>
                                         <TouchableOpacity onPress={this.changePwdType.bind(this)}>{this.pwdHideAndShow()}
                                     </TouchableOpacity>
-                                  </View> 
+                                  </View>
                           </View>
-                          <TouchableOpacity onPress={() => this.props.navigation.navigate('forgotPassword')}>  
+                          <TouchableOpacity onPress={() => this.props.navigation.navigate('forgotPassword')}>
                                   <Text style={styles.forgotText}>Forgot Password?</Text>
-                          </TouchableOpacity>                
+                          </TouchableOpacity>
                           <View style={styles.signInBtn}>
                                     <TouchableOpacity onPress={this.SignIn} >
                                       <Text style={styles.signInBtnText}>SIGN IN</Text>
                                     </TouchableOpacity>
-                          </View>                                                   
+                          </View>
                     </View>
                 </View>
-                </ScrollView>
-                <View style={styles.signInBtn2}>
+                <TouchableOpacity style={styles.signInBtn2} onPress={() => this.props.navigation.navigate('signUp')}>
                     <View style={styles.loginWrapper}>
                         <Text style={styles.signInBtnText2}>Not an Account?</Text>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('signUp')}>
+                        <View >
                             <Text style={styles.signInBtnText2}>  Sign Up</Text>
-                        </TouchableOpacity>
-                    </View>                    
-                </View>
+                        </View>
+                    </View>
+                </TouchableOpacity>
+                </ScrollView>
+
       </View>
 
    );
  }
 }
 const styles = StyleSheet.create({
-  container: 
+  container:
   {
-    padding:30 
+    padding:30
   },
   signInText:
   {
@@ -253,7 +254,7 @@ const styles = StyleSheet.create({
     fontSize:18,
     width:"57%",
     fontFamily:"TwCenMTStd",
-  }, 
+  },
   passwordField:
   {
     borderColor: '#dadada',
@@ -269,7 +270,7 @@ const styles = StyleSheet.create({
     marginTop:18,
   },
   signInBtn:
-  {   
+  {
     backgroundColor:"#33cbf6",
     borderRadius:5,
   },
@@ -288,8 +289,8 @@ const styles = StyleSheet.create({
     padding:15,
   },
   signInBtn2:
-  {  
-    backgroundColor:"#6740f2", 
+  {
+    backgroundColor:"#6740f2",
   },
   signInBtnText2:
   {
@@ -298,5 +299,5 @@ const styles = StyleSheet.create({
     textAlign:"center",
     fontFamily:"TwCenMTStd"
   },
-  
+
 });

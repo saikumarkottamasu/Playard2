@@ -84,7 +84,8 @@ export default class signUp extends Component<Props> {
   SignUp = async () =>
     {
 
-        await AsyncStorage.setItem('@storage_Key',this.state.mobileNumber)
+        await AsyncStorage.setItem('mobilenumber',this.state.mobileNumber)
+        await AsyncStorage.setItem('password',this.state.password)
         console.log(this.state.mobileNumber);
 
         const {name,email,mobileNumber,password} = this.state;
@@ -296,17 +297,18 @@ export default class signUp extends Component<Props> {
                         </View>
                     </View>
                 </View>
-          </ScrollView>
-
-                <View style={styles.signInBtn2}>
+                <TouchableOpacity style={styles.signInBtn2} onPress={() => this.props.navigation.navigate('signIn')}>
                     <View style={styles.loginWrapper}>
                         <Text style={styles.signInBtnText2}>Already have an Account?</Text>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('signIn')}>
+                        <View>
                             <Text style={styles.signInBtnText2}>  Login</Text>
-                        </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
-                  
+                </TouchableOpacity>
+          </ScrollView>
+
+
+
 
       </View>
 
@@ -406,7 +408,7 @@ errorText:
   },
   signInBtn2:
   {
-    backgroundColor:"#7e5bef",
+    backgroundColor:"#7e5bef"
   },
   signInBtnText2:
   {

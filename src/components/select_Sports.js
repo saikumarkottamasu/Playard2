@@ -29,7 +29,9 @@ export default class select_Sports extends React.Component {
        body: '2 body'
      }
    ],
-   selectedSportId: ''
+   selectedSportId: '',
+   searchText: '',
+   noresultsFound: false
   }
 }
 static navigationOptions = {
@@ -111,6 +113,7 @@ markSelectedSport(item){
   // )
 }
     renderRow(item){
+      if(item.sports.length>0){
       return(
           <View style={{flex: 1, borderWidth: 1, marginTop: 20, borderColor: '#d7d7d7', borderRadius:5}}>
         <TouchableOpacity onPress={() =>this.makeIsViewedTrue(item)} style={styles.accHeader}>
@@ -153,8 +156,61 @@ markSelectedSport(item){
           </View>
       )
     }
+    else {
+      return
+    }
+    }
+
+    getSportsSearch(){
+      this.setState({spinnerVisibility: true, loadingMessage: 'Getting locations , Please wait...'})
+      let formData = new FormData();
+      formData.append('sport', this.state.searchText);
+      let data = {
+          method: 'POST',
+          headers: {
+              'Accept': 'application/json',
+              "Content-Type": "multipart/form-data",
+          },
+          body: formData
+      }
+      fetch("http://testingmadesimple.org/playard/api/service/preferredSportSearch", data)
+      .then(response => response.json())
+      .then(responseJson =>
+       {
+            if(responseJson['status']== 1){
+              if(responseJson['sports'].length>0){
+                let notZero = false
+                for (sports of responseJson['sports']){
+                  if(sports['sports'].length>0 && !notZero){
+                    notZero=true
+                  }
+                }
+                if(!notZero){
+                  this.setState({sportsList:[], spinnerVisibility: false, noresultsFound: true})
+
+                }
+                else{
+                this.setState({sportsList:responseJson['sports'], spinnerVisibility: false})
+              }
+              }
+                // this.setState({venues:responseJson['venues'], spinnerVisibility: false, isLocalityVenueSelected: true, noresultsFound: false})
+            }
+            else if(responseJson['status']== 2){
+                this.setState({spinnerVisibility: false, venues:[], noresultsFound: true})
+            }
+            else{
+              this.setState({spinnerVisibility: false, isLocalityVenueSelected: false, noresultsFound: false})
+              this.displayError()
+            }
+        }
+
+          )
+}
 
 componentWillMount(){
+  this.getSportsList()
+}
+getSportsList(){
   this.setState({spinnerVisibility: true, loadingMessage: 'Getting sports list, Please wait...'})
   let data = {
       method: 'GET',
@@ -167,7 +223,6 @@ componentWillMount(){
   .then(response => response.json())
   .then(responseJson =>
    {
-
         if(responseJson['status']== 1){
           for( sports of responseJson['sports']){
             sports['isListViewed']=false
@@ -177,7 +232,6 @@ componentWillMount(){
             }
           }
             this.setState({sportsList:responseJson['sports'], spinnerVisibility: false})
-            GLOBAL.sports_list=responseJson['sports']
         }
         else{
           this.setState({spinnerVisibility: false})
@@ -217,6 +271,21 @@ spinnerComponent() {
     }
     }
 
+emptyLayout(){
+  if(this.state.noresultsFound){
+return(
+  <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <Text>No results found</Text>
+  </View>
+)}
+else {
+  return(
+    <View>
+    </View>
+  )
+}
+}
+
 confirmation(){
   if(this.state.selectedSportId != ''){
   Alert.alert(
@@ -255,21 +324,31 @@ else{
                           <TextInput
                                 placeholder="Search by Sports"
                                 style={styles.inputField}
-
+                                value={this.state.searchText}
+                                onChangeText={(text) => {
+                                  if(text.length == 0){
+                                    this.getSportsList()
+                                  }
+                                    this.setState({searchText:text})}}
                               />
                           <View style={styles.eyeView}>
-                              <TouchableOpacity onPress={() =>this.props.navigation.navigate('')}>
+                              <TouchableOpacity onPress={() => {
+                                if(this.state.searchText.length>0){
+                                this.getSportsSearch()}}}>
                                   <Image
                                   style={styles.searchImg}
                                   source={require('.././images/search-icon.png')} />
                             </TouchableOpacity >
                           </View>
                   </View>
+                          <View style={{flex: 1}}>
                            <FlatList
                            data={this.state.sportsList}
                            renderItem={({item}) => this.renderRow(item)}
                            extraData={this.state}
+                           ListEmptyComponent={() => this.emptyLayout()}
                          />
+                         </View>
 
               </View>
             </ScrollView>
