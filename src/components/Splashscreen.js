@@ -60,10 +60,11 @@ export default class App extends React.Component {
         <View style={styles.container1}>
           <SwiperFlatList
             autoplay
-            autoplayDelay={4}
+            autoplayDelay
             autoplayLoop
             index={2}
             showPagination
+            paginationActiveColor={"#3DBEF5"}
           >
             <View style={{ backgroundColor: 'white' }}>
               <Image
@@ -101,22 +102,22 @@ export default class App extends React.Component {
               <View style={{flexDirection:"row"}}>
                   <View style={styles.Btn}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Signin')}>
-                      <Text style={styles.headerText1}>SIGN IN</Text> 
-                    </TouchableOpacity>                            
-                  </View> 
+                      <Text style={styles.headerText1}>SIGN IN</Text>
+                    </TouchableOpacity>
+                  </View>
                   <View style={styles.Btn}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Signup')}>
-                      <Text style={styles.headerText1}>SIGN UP</Text> 
-                    </TouchableOpacity>                            
+                      <Text style={styles.headerText1}>SIGN UP</Text>
+                    </TouchableOpacity>
                   </View>
-                 
+
               </View>
             </View>
-            
+
           </SwiperFlatList>
-        
+
         </View>
-        
+
     </View>
     );
   }
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection:"row",
-  
+
   },
   container1: {
     backgroundColor: 'white',
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
   },
 
   Btn:
-  { 
+  {
     height:40,
     borderRadius:5,
     marginTop:30,
@@ -169,7 +170,7 @@ const styles = StyleSheet.create({
   headerText2:
   {
     color:'#109BD7',
-  
+
   },
   headerText4:
   {
