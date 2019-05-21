@@ -87,7 +87,6 @@ export default class signUp extends Component<Props> {
         await AsyncStorage.setItem('mobilenumber',this.state.mobileNumber)
         await AsyncStorage.setItem('password',this.state.password)
         console.log(this.state.mobileNumber);
-
         const {name,email,mobileNumber,password} = this.state;
         let reg = /^[a-zA-Z0-9 ](_(?!(\.|_))|\.(?!(_|\.))|[a-zA-Z0-9 ]){3,76}[a-zA-Z0-9 ]*$/;
         let reg1 = /^(\+\d{1,3}[- ]?)?\d{10}$/;
@@ -103,7 +102,6 @@ export default class signUp extends Component<Props> {
             this.setState({field:':#?@&%/ are not allowed and should enter 3-76 characters in the name'})
             return false;
         }
-
         else if(mobileNumber=="")
         {
           this.setState({field:'Please enter Mobile Number'})
@@ -164,10 +162,8 @@ export default class signUp extends Component<Props> {
                                   mobileNumber: '',
                                   email: '',
                                   password:'',
-
                                 })
                           }
-
                           else if(responseJson.status == ("2"))
                           {
                               alert("Failed");

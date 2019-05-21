@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,SafeAreaView,
-  Text,
+  Text,FlatList,
   TextInput,CheckBox,ScrollView,
   View,TouchableOpacity,Image,
   AsyncStorage
@@ -10,39 +10,121 @@ import {
 import {  Item, Input } from 'native-base';
 import {Collapse,CollapseHeader,CollapseBody} from 'accordion-collapse-react-native';
 import Icon from 'react-native-ionicons';
+import GridLayout from 'react-native-layout-grid';
 
-export default class Preffered_sports extends Component {
+const DomainName = 'http://testingmadesimple.org/playard/uploads/sports/'
+
+
+export default class Preffered_sports extends React.Component {
 static navigationOptions = {
        header: null,
     };
-  constructor(props) {
-    super(props);
-    this.state = {
-      status:true,
+    constructor() 
+    {
+      super();
+        this.state = 
+              {
+                sports_List: [],
+
+              };
+              this.getSportsList = this.getSportsList.bind(this);
     }
-  }
 
-  ShowHideBlueIconView = () =>{
+   renderGridItem(this2,item){
+   if(item){
+     return (
+                      <TouchableOpacity
+                             style={styles.accBody}>
+                                   <View style={styles.inlineWrapper}>
+                                         <View style={styles.itemWrapper}>
+                                             <Image
 
-  if(this.state.status == true)
-  {
-    this.setState({status: false})
+                                              source = {{ uri: '${item.url}${item.sportIcon}' }}
+                                               style={styles.sportIconImg}
+                                               />
+                                               <Text style={styles.bodyText}>{item.sportId}</Text>
+                                               <Text style={styles.bodyText}>{item.sportName}</Text>
+                                               {item.isSelected?
+                                               <View style={styles.blueIcon}>
+                                               </View>
+                                               :
+                                               null
+                                             }
+                                         </View>
+
+                                   </View>
+                    </TouchableOpacity>
+     );
+   }
+   }
+    renderRow(item){
+      return(
+          <View style={{flex: 1, borderWidth: 1, marginTop: 20, borderColor: '#d7d7d7', borderRadius:5}}>
+              <TouchableOpacity style={styles.accHeader}>
+                  <Text style={styles.accHeaderText}>{item.categoryName}</Text>              
+              </TouchableOpacity>
+              <View style={{flex: 1}}>
+                    <GridLayout
+                    items= {item['sports']}
+                    itemsPerRow={2}
+                    renderItem={(item)=>this.renderGridItem(this,item)}
+                    />          
+              </View>
+          </View>
+      )
+    
+    
+    }
+
+getSportsList(){
+
+ 
+  let data = {
+      method: 'GET',
+      headers: {
+          'Accept': 'application/json',
+          "Content-Type": "multipart/form-data",
+      }
   }
-  else
-  {
-    this.setState({status: true})
-  }
+  fetch("http://testingmadesimple.org/playard/api/service/sports", data)
+  .then(response => response.json())
+  .then(responseJson =>
+      {
+        if(responseJson.status == ("1"))
+        {
+
+          for( sports of responseJson['sports'])
+          {
+            sports['isListViewed']=false
+            sports['isAnySportSelected']=false
+            for (individualSport of sports['sports']){
+              individualSport['isSelected'] = false
+            }
+          }
+          this.setState({                       
+                          sports_List:responseJson['sports']
+                      })
+                  
+        }
+        else{
+        
+        }
+      }
+    )
+      .catch(error => console.error(error));
+      console.log(data)
+      console.log("444444",this.state)
 }
-  render() {
-    return (
-      <SafeAreaView style={styles.container}>
+
+ render()
+ {
+   
+   return(
+           <SafeAreaView style={styles.container}>
             <ScrollView>
                   <Text style={styles.headerText}>Preferred Sports</Text>
                   <Text style={styles.subHeaderText}>dummy text of printing and typesetting industry.Lorem 
-                        has been the indutry's standard dummy text</Text>
-                 
-                  
-
+                        has been the indutry's standard dummy text</Text>                 
                   <View style={{flexDirection:"row"}}>
                       <TextInput
                             placeholder="Search by Sports"
@@ -58,360 +140,23 @@ static navigationOptions = {
                         </TouchableOpacity > 
                       </View>
                   </View>
-                  <View style={styles.accordionContainer}>
-                   
-                      <Collapse>                    
-                            <CollapseHeader style={styles.accHeader}>
-                              <View style={{flexDirection:"row",alignItems:"center"}}>
-                                <Text style={styles.accHeaderText}>Popular Sports</Text>
-                                <Image
-                                    style={styles.checkedGreenImg}
-                                    source={require('.././images/checked-icon.png')} />  
-                              </View>
-                              <View style={styles.iconContainer}>
-                                <Image
-                                    style={styles.dropdownImg}
-                                    source={require('.././images/black-downarrow.png')} />  
-                              </View>
-                            </CollapseHeader>
-                            <CollapseBody >
-                              <ScrollView>
-                                <View style={{flexDirection: 'row',marginLeft:'auto'}} >
-                                    <CheckBox
-                                      value={this.state.checked2}
-                                      onValueChange={() => this.setState({ checked2: !this.state.checked2 })} />
-                                    <Text style={styles.selectText}>Select All</Text>
-                                </View>
-                                 </ScrollView>
-                                <View style={styles.accBody}>
-
-                                      <View style={styles.inlineWrapper}>
-                                            
-
-                                                <View style={styles.itemWrapper}>
-                                                    <TouchableOpacity onPress={this.ShowHideBlueIconView}>
-                                                       <View style={{flexDirection:"row"}}>
-                                                        <Image
-                                                          style={styles.sportIconImg}
-                                                          source={require('.././images/badminton.png')} /> 
-                                                        <Text style={styles.bodyText}>Badminton</Text>
-                                                      </View>
-                                                    </TouchableOpacity>
-                                                     <View>
-                                                              {
-                                                                    this.state.status ? <Text></Text> 
-                                                                    : 
-                                                                          <View style={styles.blueIcon}>
-                                                                          </View>
-                                                              }
-                                                    </View>
-                                                    
-                                                </View>
-                                            
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/cricket.png')} /> 
-                                                  <Text style={styles.bodyText}>Cricket</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/table-tennis.png')} /> 
-                                                <Text style={styles.bodyText}>Table Tennis</Text>
-                                                <View style={styles.blueIcon}>
-                                                </View>
-                                            </View>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Running</Text>
-                                                   <View style={styles.blueIcon}>
-                                                  </View>
-                                            </View>
-                                      </View>
-                                      <View style={styles.inlineWrapper}>
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/foot-ball.png')} /> 
-                                                  <Text style={styles.bodyText}>Football</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/tennis.png')} /> 
-                                                  <Text style={styles.bodyText}>Tennis</Text>
-                                                  <View style={styles.blueIcon}>
-                                                </View>
-                                            </View>
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/basket-ball.png')} /> 
-                                                  <Text style={styles.bodyText}>Basket Ball</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/cycling.png')} /> 
-                                                  <Text style={styles.bodyText}>Cycling</Text>
-                                                   <View style={styles.blueIcon}>
-                                                  </View>
-                                            </View>
-                                            
-                                      </View>
-                                </View>
-                              
-                            </CollapseBody>
-                      </Collapse>
-
-                </View>
-                  <View style={styles.accordionContainer}>
-                      <Collapse>                    
-                            <CollapseHeader style={styles.accHeader}>
-                              <View style={{flexDirection:"row",alignItems:"center"}}>
-                                <Text style={styles.accHeaderText}>Team Sports</Text>
-                                <Image
-                                    style={styles.checkedGreenImg}
-                                    source={require('.././images/checked-icon.png')} />  
-                              </View>
-                              <View style={styles.iconContainer}>
-                                <Image
-                                    style={styles.dropdownImg}
-                                    source={require('.././images/black-downarrow.png')} />  
-                              </View>
-                            </CollapseHeader>
-                            <CollapseBody >
-                               <View style={{flexDirection: 'row',marginLeft:'auto'}} >
-                                    <CheckBox
-                                      value={this.state.checked2}
-                                      onValueChange={() => this.setState({ checked2: !this.state.checked2 })} />
-                                    <Text style={styles.selectText}>Select All</Text>
-                                </View>
-                                <View style={styles.accBody}>
-                                      <View style={styles.inlineWrapper}>
-                                           
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/cricket.png')} /> 
-                                                  <Text style={styles.bodyText}>Cricket</Text>
-                                            </View>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/table-tennis.png')} /> 
-                                                <Text style={styles.bodyText}>Table Tennis</Text>
-                                                <View style={styles.blueIcon}>
-                                                </View>
-                                            </View>
-
-                                      </View>
-                                      <View style={styles.inlineWrapper}>
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/foot-ball.png')} /> 
-                                                  <Text style={styles.bodyText}>Football</Text>
-                                            </View>
-                                           
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/basket-ball.png')} /> 
-                                                  <Text style={styles.bodyText}>Basket Ball</Text>
-                                            </View>
-                                           
-                                            
-                                      </View>
-                                </View>
-                            </CollapseBody>
-                      </Collapse>
-                </View>
-                  <View style={styles.accordionContainer}>
-                      <Collapse>                    
-                            <CollapseHeader style={styles.accHeader}>
-                              <View style={{flexDirection:"row",alignItems:"center"}}>
-                                <Text style={styles.accHeaderText}>Racquet Sports</Text>
-                                <Image
-                                    style={styles.checkedGreenImg}
-                                    source={require('.././images/checked-icon.png')} />  
-                              </View>
-                              <View style={styles.iconContainer}>
-                                <Image
-                                    style={styles.dropdownImg}
-                                    source={require('.././images/black-downarrow.png')} />  
-                              </View>
-                            </CollapseHeader>
-                            <CollapseBody >
-                               <View style={{flexDirection: 'row',marginLeft:'auto'}} >
-                                    <CheckBox
-                                      value={this.state.checked2}
-                                      onValueChange={() => this.setState({ checked2: !this.state.checked2 })} />
-                                    <Text style={styles.selectText}>Select All</Text>
-                                </View>
-                                <View style={styles.accBody}>
-                                      <View style={styles.inlineWrapper}>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/badminton.png')} /> 
-                                                <Text style={styles.bodyText}>Badminton</Text>
-                                                <View style={styles.blueIcon}>
-                                                </View>
-                                            </View>
-                                            
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/table-tennis.png')} /> 
-                                                <Text style={styles.bodyText}>Table Tennis</Text>
-                                                <View style={styles.blueIcon}>
-                                                </View>
-                                            </View>
-                                            
-                                      </View>
-                                      <View style={styles.inlineWrapper}>
-                                            
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/tennis.png')} /> 
-                                                  <Text style={styles.bodyText}>Tennis</Text>
-                                                  <View style={styles.blueIcon}>
-                                                 
-                                                </View>
-                                            </View>
-                                            
-                                            
-                                      </View>
-                                </View>
-                            </CollapseBody>
-                      </Collapse>
-                </View>
-                  <View style={styles.accordionContainer}>
-                      <Collapse>                    
-                            <CollapseHeader style={styles.accHeader}>
-                              <View style={{flexDirection:"row",alignItems:"center"}}>
-                                <Text style={styles.accHeaderText}>Fitness Sports</Text>
-                                <Image
-                                    style={styles.checkedGreenImg}
-                                    source={require('.././images/checked-icon.png')} />  
-                              </View>
-                              <View style={styles.iconContainer}>
-                                <Image
-                                    style={styles.dropdownImg}
-                                    source={require('.././images/black-downarrow.png')} />  
-                              </View>
-                            </CollapseHeader>
-                            <CollapseBody >
-                                <View style={{flexDirection: 'row',marginLeft:'auto'}} >
-                                    <CheckBox
-                                      value={this.state.checked2}
-                                      onValueChange={() => this.setState({ checked2: !this.state.checked2 })} />
-                                    <Text style={styles.selectText}>Select All</Text>
-                                </View>
-                                <View style={styles.accBody}>
-                                      <View style={styles.inlineWrapper}>
-                                           
-                                            
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/running.png')} /> 
-                                                  <Text style={styles.bodyText}>Running</Text>
-                                                   <View style={styles.blueIcon}>
-                                                  </View>
-                                            </View>
-                                      </View>
-                                      <View style={styles.inlineWrapper}>
-                                          
-                                            
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/cycling.png')} /> 
-                                                  <Text style={styles.bodyText}>Cycling</Text>
-                                                   <View style={styles.blueIcon}>
-                                                  </View>
-                                            </View>
-                                            
-                                      </View>
-                                </View>
-                            </CollapseBody>
-                      </Collapse>
-                </View>
-                <View style={styles.accordionContainer}>
-                      <Collapse>                    
-                            <CollapseHeader style={styles.accHeader}>
-                              <View style={{flexDirection:"row",alignItems:"center"}}>
-                                <Text style={styles.accHeaderText}>Recreation Sports</Text>
-                                
-                              </View>
-                              <View style={styles.iconContainer}>
-                                <Image
-                                    style={styles.dropdownImg}
-                                    source={require('.././images/black-downarrow.png')} />  
-                              </View>
-                            </CollapseHeader>
-                            <CollapseBody >
-                                <View style={{flexDirection: 'row',marginLeft:'auto'}} >
-                                    <CheckBox
-                                      value={this.state.checked2}
-                                      onValueChange={() => this.setState({ checked2: !this.state.checked2 })} />
-                                    <Text style={styles.selectText}>Select All</Text>
-                                </View>
-                                <View style={styles.accBody}>
-                                      <View style={styles.inlineWrapper}>
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/badminton.png')} /> 
-                                                <Text style={styles.bodyText}>Yoga</Text>
-                                               
-                                            </View>
-                                            
-                                            <View style={styles.itemWrapper}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/table-tennis.png')} /> 
-                                                <Text style={styles.bodyText}>Swimming</Text>
-                                                
-                                            </View>
-                                            
-                                      </View>
-                                      <View style={styles.inlineWrapper}>
-                                            
-                                            <View style={styles.itemWrapper2}>
-                                                <Image
-                                                  style={styles.sportIconImg}
-                                                  source={require('.././images/tennis.png')} /> 
-                                                  <Text style={styles.bodyText}>Chess</Text>
-                                                  
-                                            </View>
-                                            
-                                            
-                                      </View>
-                                </View>
-                            </CollapseBody>
-                      </Collapse>
-                </View>
-
-
+                  <View style={{flex: 1}}>
+                      <FlatList
+                           data={this.state.sports_List}
+                           renderItem={({item}) => this.renderRow(item)}
+                          keyExtractor={item => item.categoryId}
+                      />
+                  </View>
                 <View style={styles.signInBtn}>
-                      <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
+                      <TouchableOpacity onPress={this.getSportsList} >
                             <Text style={styles.signInBtnText}>SAVE</Text>
                       </TouchableOpacity>
-                </View>
-         
-        
-       
+                </View>                       
             </ScrollView>
       </SafeAreaView>
-    );
-  }
+
+   );
+ }
 }
 
 const styles = StyleSheet.create({
@@ -493,13 +238,11 @@ selectText:
     color:"#999999",
     marginTop:8
   },
-
 inlineWrapper:
   {
     flexDirection:"column",
     width:"50%"
   },
-
 signInBtn:
   {   
     backgroundColor:"#33cbf6",
@@ -565,6 +308,4 @@ checkedGreenImg:
     height:12,
     marginLeft:5
   },
-
 });
-

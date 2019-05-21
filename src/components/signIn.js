@@ -199,6 +199,7 @@ pwdHideAndShow() {
                           </View>
                     </View>
                 </View>
+                 </ScrollView>
                 <TouchableOpacity style={styles.signInBtn2} onPress={() => this.props.navigation.navigate('signUp')}>
                     <View style={styles.loginWrapper}>
                         <Text style={styles.signInBtnText2}>Not an Account?</Text>
@@ -207,7 +208,7 @@ pwdHideAndShow() {
                         </View>
                     </View>
                 </TouchableOpacity>
-                </ScrollView>
+               
 
       </View>
 

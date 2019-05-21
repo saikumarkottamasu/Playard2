@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet,TouchableOpacity,TouchableHighlight,FlatList, Text, View,Button,Image,ScrollView} from 'react-native';
+import {Platform, StyleSheet,TouchableOpacity,SafeAreaView,TouchableHighlight,ActivityIndicator,FlatList, Text, View,Button,Image,ScrollView} from 'react-native';
 import Icon from 'react-native-ionicons';
 var GLOBAL = require('.././config/global.js');
 
@@ -16,14 +16,35 @@ export default class Profile extends Component {
                 userId: '1', 
                 activities: [],
                 loading: false,
+                loadingMessage:''
 
               };
 
     }
-   
+    
+    spinnerComponent() {
+      if(this.state.loading){
+      return (
+        <View style={{  flex:1,alignItems: "center", justifyContent: "center"}}>
+            <View style={{ flexDirection: 'row',borderRadius: 16, backgroundColor: "grey", }}>
+                <ActivityIndicator color='#ffffff' style={{ padding: 4}} visibility={true} animating={this.state.loading} />
+                {
+                    this.state.loadingMessage != '' ?
+                        <Text style={{ fontSize: 16, color: '#FFFFFF',padding: 5, marginRight: 4 }}>{this.state.loadingMessage}</Text> :
+                        null
+                }
+            </View>
+        </View>
+      );
+    }
+    }
+    componentWillMount()
+    {
+      this.get_activities();
+    }
   get_activities = async () => 
     {
-            this.setState({ loading: true });
+        this.setState({ loading: true ,loadingMessage: 'Getting data , Please wait...'});
 
         let formData = new FormData();
         formData.append('userId', this.state.userId);
@@ -39,13 +60,12 @@ export default class Profile extends Component {
         fetch("http://testingmadesimple.org/playard/api/service/activities", data)
         .then(response => response.json())
         .then(responseJson => 
-         { 
-            
+         {            
                   if(responseJson.status == ("1"))
                    {
-                       alert("success");
                          this.setState({                       
-                          activities:responseJson['activities']
+                          activities:responseJson['activities'],
+                          loading: false,
                       });
                     }                   
                     else
@@ -63,7 +83,7 @@ export default class Profile extends Component {
 
     _renderActivityList(item){
     return(
-                              <TouchableOpacity onPress={() => this.props.navigation.navigate('')}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('')}>
 
                     <View style={styles.listBody}>
                           <View style={{flexDirection:"row",marginBottom:10}}>
@@ -118,8 +138,10 @@ export default class Profile extends Component {
     )
     }
   render() {
+    if(!this.state.loading)
+    {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
               <View style={styles.cartHeader}>
                     <View style={styles.profileView}>
                           <Text style={styles.profileText}>Rasoolpura</Text>
@@ -183,6 +205,9 @@ export default class Profile extends Component {
                             </TouchableOpacity>
                   </View>
               </View>
+              <View>
+               {this.spinnerComponent()}
+               </View>
               <View style={{height:450}}>
                    <FlatList
                         data={this.state.activities}
@@ -192,9 +217,81 @@ export default class Profile extends Component {
               </View>
 
               
-      </View>
+      </SafeAreaView>
 
     );
+    }
+    else{
+        return(
+      <SafeAreaView style={{flex: 1}}>
+          <ScrollView>
+                        <View style={styles.cartHeader}>
+                    <View style={styles.profileView}>
+                          <Text style={styles.profileText}>Rasoolpura</Text>
+                          <View style={[styles.iconContainer,{marginLeft:5}]}>
+                              <Image
+                                style={styles.locationImg}
+                                source={require('.././images/location-checked.png')} />
+                          </View>
+                    </View>
+                    <View style={{marginLeft:'auto',flexDirection:"row",marginRight:15}}>
+                        <View style={styles.iconContainer}>
+                              <TouchableOpacity onPress={() =>{GLOBAL.sport= ''; this.props.navigation.navigate('create_Activity')}}>                  
+                                   <Image
+                                  style={styles.locationImg}
+                                  source={require('.././images/create-activity.png')} />
+                              </TouchableOpacity>
+                        </View>
+                        <View style={styles.iconContainer}>
+                              <TouchableOpacity onPress={() => this.props.navigation.navigate('Conversations')}>
+                                   <Image
+                                  style={styles.locationImg}
+                                  source={require('.././images/chat-icon.png')} />
+                              </TouchableOpacity>
+                        </View>
+                        <View style={styles.iconContainer}>
+                              <TouchableOpacity onPress={() => this.props.navigation.navigate('Notifications')}>
+                                   <Image
+                                  style={styles.locationImg}
+                                  source={require('.././images/notification-icon.png')} />
+                              </TouchableOpacity>
+                        </View>
+                    </View>
+              </View>
+              <View style={{flexDirection:"row",backgroundColor:"#6ad5f3"}}>
+                    <View style={styles.headerWrapper}>
+                        <Text style={styles.headerText}>My Activities</Text>
+
+                    </View>
+                    <View style={[styles.headerWrapper,{ borderBottomWidth: 0}]}>
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('Mysports')}>
+                            <View style={{flexDirection:"row"}}>
+                              <Text style={[styles.headerText,{ color:"#daf3fb"}]}>My Sports</Text>
+
+                           </View>
+                        </TouchableHighlight>
+                    </View>
+                    <View style={[styles.headerWrapper,{ borderBottomWidth: 0}]}>
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('')}>
+                            <View style={{flexDirection:"row"}}>
+                              <Text style={[styles.headerText,{ color:"#daf3fb"}]}>Other Sports</Text>
+
+                           </View>
+                        </TouchableHighlight>
+                    </View>
+              </View>
+              <View style={styles.upcomingWrapper}>
+                  <Text style={styles.upcomingText}>Upcoming Activities</Text>
+                  <View style={styles.signInBtn}>
+                            <TouchableOpacity >
+                                  <Text style={styles.signInBtnText}>See all</Text>
+                            </TouchableOpacity>
+                  </View>
+              </View>
+
+            {this.spinnerComponent()}
+          </ScrollView>
+      </SafeAreaView>)}
   }
 }
 

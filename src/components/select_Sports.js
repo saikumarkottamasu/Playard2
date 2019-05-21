@@ -58,9 +58,6 @@ static navigationOptions = {
                                          </View>
                                    </View>
                     </TouchableOpacity>
-
-
-
      );
    }
    }
@@ -143,15 +140,15 @@ markSelectedSport(item){
           </TouchableOpacity>
           <View style={{flex: 1}}>
           {item.isListViewed?
-          <GridLayout
-          items= {item['sports']}
-          itemsPerRow={2}
+            <GridLayout
+                items= {item['sports']}
+                itemsPerRow={2}
 
-          renderItem={(item)=>this.renderGridItem(this,item)}
-          />
-          :
-          null
-        }
+                renderItem={(item)=>this.renderGridItem(this,item)}
+            />
+            :
+            null
+          } 
           </View>
           </View>
       )

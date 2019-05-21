@@ -43,7 +43,6 @@ import Filter_select_sports from './Filter_select_sports';
 import Filter_select_time from './Filter_select_time';
 import Filter_select_skill from './Filter_select_skill';
 import Filter_select_date from './Filter_select_date';
-// import sortIcon from './sortIcon';
 import modify_Activity from './modify_Activity';
 import managePlayers from './managePlayers';
 import Playing from './managePlayers';
@@ -80,9 +79,7 @@ import Playing from './managePlayers';
 		search_Venue: {screen: search_Venue},
 		Notifications: {screen: Notifications},
 		notification_Invitation: {screen: notification_Invitation},
-
 		Gamebook: { screen: Gamebook },
-
 		Cricket: { screen: Cricket },
 		
 		edit: { screen: edit },
@@ -93,7 +90,6 @@ import Playing from './managePlayers';
 		Filter_select_time: { screen: Filter_select_time },
 		Filter_select_skill: { screen: Filter_select_skill },
 		Filter_select_date: { screen: Filter_select_date },
-		// sortIcon: { screen:sortIcon  },	
 		modify_Activity: { screen:modify_Activity  },	
 		managePlayers: { screen:managePlayers  },
 			
@@ -102,7 +98,7 @@ import Playing from './managePlayers';
 		Splashscreen: { screen: Splashscreen },
 	},
 	{
-    	initialRouteName: 'Profile',
+    	initialRouteName: 'Mysports',
   	}
 
 );

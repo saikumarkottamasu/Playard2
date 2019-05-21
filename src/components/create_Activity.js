@@ -225,8 +225,8 @@ createActivity(){
                                 </View>
                             </View>
                       </View>
-                      </TouchableOpacity>
-                      <TouchableOpacity onPress={() => this.props.navigation.navigate('select_Location',{createActivity: this})}>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => this.props.navigation.navigate('select_Location',{createActivity: this})}>
                       <View style={styles.itemWrapper}>
                              <Text style={styles.selectSport}>Area/ Location</Text>
                             <View style={styles.textWrapper}>
