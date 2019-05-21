@@ -158,10 +158,10 @@ markSelectedSport(item){
     }
     }
 
-    getSportsSearch(){
-      this.setState({spinnerVisibility: true, loadingMessage: 'Getting locations , Please wait...'})
+    getSportsSearch(text){
+      this.setState({spinnerVisibility: false, loadingMessage: 'Getting locations , Please wait...'})
       let formData = new FormData();
-      formData.append('sport', this.state.searchText);
+      formData.append('sport', text);
       let data = {
           method: 'POST',
           headers: {
@@ -176,18 +176,21 @@ markSelectedSport(item){
        {
             if(responseJson['status']== 1){
               if(responseJson['sports'].length>0){
+                let temp = responseJson['sports']
                 let notZero = false
-                for (sports of responseJson['sports']){
+                for (sports of temp){
                   if(sports['sports'].length>0 && !notZero){
                     notZero=true
                   }
+                  console.log("####",sports);
                 }
                 if(!notZero){
                   this.setState({sportsList:[], spinnerVisibility: false, noresultsFound: true})
 
                 }
                 else{
-                this.setState({sportsList:responseJson['sports'], spinnerVisibility: false})
+                  console.log("@@!!!temp",temp);
+                this.setState({sportsList: temp, spinnerVisibility: false})
               }
               }
                 // this.setState({venues:responseJson['venues'], spinnerVisibility: false, isLocalityVenueSelected: true, noresultsFound: false})
@@ -323,15 +326,17 @@ else{
                                 style={styles.inputField}
                                 value={this.state.searchText}
                                 onChangeText={(text) => {
+                                  this.setState({searchText:text})
                                   if(text.length == 0){
                                     this.getSportsList()
                                   }
-                                    this.setState({searchText:text})}}
+                                  else{
+                                  this.getSportsSearch(text)
+                                    }}
+                                  }
                               />
                           <View style={styles.eyeView}>
-                              <TouchableOpacity onPress={() => {
-                                if(this.state.searchText.length>0){
-                                this.getSportsSearch()}}}>
+                              <TouchableOpacity >
                                   <Image
                                   style={styles.searchImg}
                                   source={require('.././images/search-icon.png')} />
